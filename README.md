@@ -19,6 +19,7 @@ Tippy is a specialist subscription service bringing the greatest tastes from the
       - [As a first time user/potential customer -](#as-a-first-time-userpotential-customer--)
       - [As a return user/customer -](#as-a-return-usercustomer--)
       - [As an admin user -](#as-an-admin-user--)
+    - [Wireframes](#wireframes)
 
 ## **UX Design**
 
@@ -54,3 +55,11 @@ The goal of this project is to produce an e-commerce website selling monthly spe
 - Add posts to the sites info blog.
 
 For user stories checklist please view the google sheets table [here](https://docs.google.com/spreadsheets/d/1rKYF5s_qeeRhiHWJwbDJQ15gvJIOe2B4bTUiPIVZyoo/edit?usp=sharing).
+
+### Wireframes
+
+Wireframes were created for mobile, tablet and desktop screen sizes with [Figma](https://www.figma.com)
+
+- [Mobile](readme-assets/tippy-wireframes-mobile.png)
+- [Tablet](readme-assets/tippy-wireframes-tablet.png)
+- [Desktop](readme-assets/tippy-wireframes-desktop.png)
