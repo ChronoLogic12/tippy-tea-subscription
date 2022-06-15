@@ -4,17 +4,45 @@
 <html>
 
 <head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    {% block meta %}
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tippy</title>
+    {% endblock %}
+
+    {% block extra_meta %}
+    {% endblock %}
+
+    {% block corecss %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    {% endblock %}
+
+    {% block extra_css %}
+    {% endblock %}
+
+    <title>Tippy {% block extra_title %}{% endblock %}</title>
 </head>
 
 <body>
+    <header>
 
+    </header>
+    {% if messages %}
+    {% endif %}
+
+    {% block page_header %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block corejs %}
     <script type="text/javascript" src="js/materialize.min.js"></script>
+    {% endblock %}
+
+    {% block extra_js %}
+    {% endblock %}
 </body>
 
 </html>
