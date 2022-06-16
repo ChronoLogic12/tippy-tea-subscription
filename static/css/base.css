@@ -6,6 +6,26 @@
 	color: #feffde !important;
 }
 
+a,
+i {
+	transition: 0.2s;
+}
+
+a:hover,
+i:hover {
+	color: #fff !important;
+	text-shadow: 0 0 3px #fff !important;
+}
+
+.background-g1 {
+	background-color: #feffde !important;
+}
+
+.background-g2 {
+	background-color: #52734d !important;
+}
+
+/* nav */
 nav a {
 	text-transform: uppercase !important;
 	letter-spacing: 2px;
@@ -26,17 +46,34 @@ nav a {
 	margin-left: 2rem;
 }
 
-.brand-logo-text {
-}
-
 .sidenav a {
 	color: #fff !important;
 }
 
-.background-g1 {
-	background-color: #feffde !important;
+/* footer */
+
+.social-icons {
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+	margin: auto;
 }
 
-.background-g2 {
-	background-color: #52734d !important;
+.social-icons a {
+	font-size: 2rem;
+}
+
+footer p {
+	margin-top: 0;
+}
+
+/* media queries */
+
+@media only screen and (min-width: 600px) {
+	.social-icons {
+		flex-direction: row;
+	}
+	.social-icons a {
+		margin: auto 1.5rem;
+	}
 }
