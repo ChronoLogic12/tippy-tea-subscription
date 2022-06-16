@@ -1,0 +1,42 @@
+/* global styling */
+
+* {
+	font-family: "Inconsolata", monospace;
+	font-weight: 400;
+	color: #feffde !important;
+}
+
+nav a {
+	text-transform: uppercase !important;
+	letter-spacing: 2px;
+}
+
+.sidenav {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.brand-logo {
+	width: 4rem;
+	color: #feffde !important;
+}
+
+.brand-logo-icon {
+	margin-left: 2rem;
+}
+
+.brand-logo-text {
+}
+
+.sidenav a {
+	color: #fff !important;
+}
+
+.background-g1 {
+	background-color: #feffde !important;
+}
+
+.background-g2 {
+	background-color: #52734d !important;
+}
