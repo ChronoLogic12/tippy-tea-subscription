@@ -83,4 +83,4 @@ Wireframes were created for mobile, tablet and desktop screen sizes with [Figma]
 ### Help and Info
 
 - Code Institute learning material - general knowledge.
-- [Youtube tutorial](https://www.youtube.com/watch?v=UpssHYl6bjA) from [thenewboston](https://www.youtube.com/user/thenewboston) on youtube on testing in django.
+- [Youtube tutorial](https://www.youtube.com/watch?v=GBgRMdjAx_c) from [Very Academy](https://www.youtube.com/c/veryacademy) on youtube on testing in django.
