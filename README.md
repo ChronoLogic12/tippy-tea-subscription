@@ -20,6 +20,10 @@ Tippy is a specialist subscription service bringing the greatest tastes from the
       - [As a return user/customer -](#as-a-return-usercustomer--)
       - [As an admin user -](#as-an-admin-user--)
     - [Wireframes](#wireframes)
+  - [Credits](#credits)
+    - [Content](#content)
+    - [Media](#media)
+    - [Help and Info](#help-and-info)
 
 ## **UX Design**
 
@@ -63,3 +67,20 @@ Wireframes were created for mobile, tablet and desktop screen sizes with [Figma]
 - [Mobile](readme-assets/tippy-wireframes-mobile.png)
 - [Tablet](readme-assets/tippy-wireframes-tablet.png)
 - [Desktop](readme-assets/tippy-wireframes-desktop.png)
+
+## Credits
+
+### Content
+
+- [Bootstrap](https://getbootstrap.com/) was used to create the collapsing navigation bar and responsive grid layouts
+- [Bootstrap Icons](https://icons.getbootstrap.com/) for social media link icons
+
+### Media
+
+- [Cloudinary](https://cloudinary.com/console/c-087b7b36d5737750ed37ab5fb60479/getting-started) CDN was used for cloud based image storage and servicing.
+- Images were sourced from [Pexels](https://www.pexels.com/) and can be found in [this collection](https://www.pexels.com/collections/tippy-w5mdqpg/).
+
+### Help and Info
+
+- Code Institute learning material - general knowledge.
+- [Youtube tutorial](https://www.youtube.com/watch?v=UpssHYl6bjA) from [thenewboston](https://www.youtube.com/user/thenewboston) on youtube on testing in django.
