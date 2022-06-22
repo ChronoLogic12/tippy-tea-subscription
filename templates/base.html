@@ -1,0 +1,135 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block meta %}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon"
+        href="https://res.cloudinary.com/chronologic12/image/upload/v1655720179/tippy/tippy-favicon_uwbvg7.png"
+        type="image/png" />
+    {% endblock %} {% block extra_meta %} {% endblock %} {% block corecss %}
+    <!-- materialize -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <!-- custom style sheet-->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    {% endblock %} {% block extra_css %} {% endblock %}
+
+    <title>Tippy {% block extra_title %}{% endblock %}</title>
+</head>
+
+<body>
+    {% if messages %} {% endif %}
+
+    <nav>
+        <div class="nav-wrapper background-g2 z-depth-4">
+            <a href="{% url 'home' %}" class="brand-logo brand-logo-icon left-align hide-on-med-and-down">
+                <img src="https://res.cloudinary.com/chronologic12/image/upload/v1655566051/tippy/tippy-logo-thick-no-background_xvlze9.svg"
+                    alt="Outline of a steaming teacup in shades of pale green.">
+                <h4>Tippy</h4>
+            </a>
+            <a href="{% url 'home' %}" class="brand-logo hide-on-large-only">
+                tippy
+            </a>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger mide"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li {% if request.path == "/subscriptions" %} class="active" {% endif %}>
+                    <a href="#">Subscriptions</a>
+                </li>
+                <li {% if request.path == "/about" %} class="active" {% endif %}>
+                    <a href="#">About us</a>
+                </li>
+                <li {% if request.path == "/blog" %} class="active" {% endif %}>
+                    <a href="#">Blog</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                <li {% if request.path == "/profile" %} class="active" {% endif %}>
+                    <a href="#">Profile</a>
+                </li>
+                <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                {% else %}
+                <li {% if request.path == "/register" %} class="active" {% endif %}>
+                    <a href="{% url 'account_signup' %}">Register</a>
+                </li>
+                <li {% if request.path == "/login" %} class="active" {% endif %}>
+                    <a href="{% url 'account_login' %}">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <ul class="sidenav background-g2 white-text" id="mobile-nav">
+            <li {% if request.path == "/subscriptions" %} class="active" {% endif %}>
+                <a href="#">Subscriptions</a>
+            </li>
+            <li {% if request.path == "/about" %} class="active" {% endif %}>
+                <a href="#">About us</a>
+            </li>
+            <li {% if request.path == "/blog" %} class="active" {% endif %}>
+                <a href="#">Blog</a>
+            </li>
+            {% if request.user.is_authenticated %}
+            <li {% if request.path == "/profile" %} class="active" {% endif %}>
+                <a href="#">Profile</a>
+            </li>
+            <li><a href="{% url 'account_logout' %}">Logout</a></li>
+            {% else %}
+            <li {% if request.path == "/register" %} class="active" {% endif %}>
+                <a href="{% url 'account_signup' %}">Register</a>
+            </li>
+            <li {% if request.path == "/login" %} class="active" {% endif %}>
+                <a href="{% url 'account_login' %}">Login</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% block page_header %} {% endblock %} {% block content %} {% endblock %}
+
+    <footer class="page-footer background-g2 z-depth-4">
+        <div class="container-fluid center-align">
+            <div class="row">
+                <div class="s12 social-icons center">
+                    <a href="https://www.facebook.com" target="_blank" aria-label="visit our facebook page">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="https://www.twitter.com" target="_blank" aria-label="visit our twitter page">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank" aria-label="visit our instagram page">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+                <div class="col s12">
+                    <h5>Stay up to date!</h5>
+                    <p>
+                        Be the first to hear about our monthly news and offers! <br>
+                        Sign up to our newsletter <a class="blue-text" href="#">here.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    {% block corejs %}
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- materialize -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/1d3dfbd135.js" crossorigin="anonymous"></script>
+    <!-- custom javascript -->
+    <script src="{% static 'js/base.js' %}"></script>
+    {% endblock %} {% block extra_js %} {% endblock %}
+</body>
+
+</html>
