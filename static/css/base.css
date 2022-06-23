@@ -15,10 +15,14 @@ html {
 }
 
 body {
-	background-color: var(--g1);
+	background-color: var(--g2);
 	font-family: "Inconsolata", monospace;
 	font-weight: 400;
 	color: var(--g5) !important;
+}
+
+main {
+	min-height: calc(100vh - 64px);
 }
 
 .row {
@@ -28,7 +32,8 @@ body {
 
 a,
 i,
-.button {
+.button,
+.button-secondary {
 	transition: 0.2s;
 	color: var(--g5) !important;
 }
@@ -38,9 +43,11 @@ i,
 }
 
 a:hover,
-i:hover {
+i:hover,
+button:hover {
 	color: #fff !important;
 	text-shadow: 0 0 3px #fff !important;
+	cursor: pointer !important;
 }
 
 .background-g1 {
@@ -52,12 +59,30 @@ i:hover {
 }
 
 .button {
-	padding: 1rem;
+	padding: 0.5rem;
+	margin: 0.5rem 0;
 	border: var(--g5) 3px solid;
 	color: var(--g5) !important;
 	background-color: var(--p1);
 	min-width: fit-content !important;
 	white-space: nowrap;
+	width: fit-content;
+}
+
+.button-secondary {
+	padding: 0.3rem;
+	margin: 0.5rem 0;
+	border: var(--g1) 3px solid;
+	color: var(--g1) !important;
+	background-color: var(--g5);
+	min-width: fit-content !important;
+	white-space: nowrap;
+	width: fit-content;
+}
+
+.button-secondary:hover {
+	color: var(--g1) !important;
+	text-shadow: 0 0 3px var(--g1) !important;
 }
 
 /* nav */
@@ -144,7 +169,7 @@ body {
 	height: 100% !important;
 }
 
-.hero-card {
+.custom-card {
 	width: 70% !important;
 	padding: 1rem !important;
 	margin: 2rem;
@@ -164,8 +189,14 @@ body {
 	font-size: 4rem;
 }
 
-.custom-card {
-	padding: 2rem !important;
+.how-it-works-card {
+	margin: 0;
+	padding: 2% !important;
+}
+
+.how-it-works-card i {
+	color: var(--p2) !important;
+	text-shadow: 0 0 3px var(--p1);
 }
 
 .how-it-works-card:nth-child(odd) {
@@ -175,6 +206,26 @@ body {
 .how-it-works-card:nth-child(even) {
 	background-color: var(--g4) !important;
 	color: var(--g1) !important;
+}
+
+/* auth */
+
+.auth label {
+	visibility: hidden;
+}
+
+.auth p:not(:first-child) {
+	margin: 0;
+}
+
+.auth-button-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.auth h2 {
+	margin: 0.5rem;
 }
 
 /* media queries */
@@ -191,5 +242,14 @@ body {
 @media only screen and (min-width: 992px) {
 	.hero-container {
 		flex-direction: row !important;
+	}
+	.auth-button-container {
+		flex-direction: row;
+	}
+	.auth .custom-card {
+		padding: 2rem !important;
+	}
+	.auth :is(.button, .button-secondary) {
+		padding: 1rem;
 	}
 }
