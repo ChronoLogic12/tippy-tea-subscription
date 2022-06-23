@@ -218,6 +218,10 @@ body {
 	margin: 0;
 }
 
+.auth input {
+	color: var(--g5);
+}
+
 .auth-button-container {
 	display: flex;
 	flex-direction: column;
