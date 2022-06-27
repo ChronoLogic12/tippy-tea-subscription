@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'about/css/about.css' %}">
+{% endblock %}
+
+{% block extra_title %}
+- About
+{% endblock %}
+
+{% block content %}
+<section class="about z-depth-4">
+    <div class="container about-container valign-wrapper">
+        <div class="row about-row valign-wrapper">
+            <div class="col s12 m8 center-align custom-card z-depth-4">
+                Lorem ipsum dolor sit amet, consectetur adipiscingelit. Suspendisse
+                finibus leo nibh, eget volutpat orci fringilla et. Mauris sit amet convallis velit. Sed dapibus
+                venenatis arcu non facilisis. Nullam consectetur elementum elit, eget porttitor elit posuere vel.
+                Duis
+                eget tempor ante. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris tempus magna
+                sit
+                amet ligula accumsan, at dictum odio sagittis. Donec porta ullamcorper diam ac commodo.</div>
+            <div class="col s12 m4 center-align">
+                <img class="responsive-img z-depth-4"
+                    src="https://res.cloudinary.com/chronologic12/image/upload/v1656321094/tippy/images/pexels-pixabay-39347_cgz72p.jpg">
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row about-row valign-wrapper">
+            <div class="col s12 m4 center-align">
+                <img class="responsive-img z-depth-4"
+                    src="https://res.cloudinary.com/chronologic12/image/upload/v1656321094/tippy/images/pexels-pixabay-39347_cgz72p.jpg">
+            </div>
+            <div class="col s12 m8 center-align custom-card z-depth-4">
+                Lorem ipsum dolor sit amet, consectetur adipiscingelit. Suspendisse
+                finibus leo nibh, eget volutpat orci fringilla et. Mauris sit amet convallis velit. Sed dapibus
+                venenatis arcu non facilisis. Nullam consectetur elementum elit, eget porttitor elit posuere vel.
+                Duis
+                eget tempor ante. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris tempus magna
+                sit
+                amet ligula accumsan, at dictum odio sagittis. Donec porta ullamcorper diam ac commodo.
+            </div>
+        </div>
+</section>
+{% endblock %}
