@@ -160,15 +160,12 @@ body {
 	flex-direction: column !important;
 	justify-content: center;
 	align-items: center;
-}
-
-.hero-content {
 	position: relative;
 	height: 100% !important;
 }
 
 .custom-card {
-	width: 70% !important;
+	/* width: 70% !important; */
 	padding: 1rem !important;
 	margin: 2rem;
 	border: var(--g5) 3px solid;
@@ -233,9 +230,6 @@ body {
 /* media queries */
 
 @media only screen and (max-width: 600px) {
-	.container {
-		width: 100%;
-	}
 	.custom-card {
 		width: 100%;
 	}

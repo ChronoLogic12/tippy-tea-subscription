@@ -35,7 +35,6 @@
             <a href="{% url 'home' %}" class="brand-logo brand-logo-icon left-align hide-on-med-and-down">
                 <img src="https://res.cloudinary.com/chronologic12/image/upload/v1655566051/tippy/tippy-logo-thick-no-background_xvlze9.svg"
                     alt="Outline of a steaming teacup in shades of pale green.">
-                <h4>Tippy</h4>
             </a>
             <a href="{% url 'home' %}" class="brand-logo hide-on-large-only">
                 tippy
@@ -46,7 +45,7 @@
                     <a href="#">Subscriptions</a>
                 </li>
                 <li {% if request.path == "/about" %} class="active" {% endif %}>
-                    <a href="#">About us</a>
+                    <a href="{% url 'about' %}">About us</a>
                 </li>
                 <li {% if request.path == "/blog" %} class="active" {% endif %}>
                     <a href="#">Blog</a>
@@ -72,7 +71,7 @@
                 <a href="#">Subscriptions</a>
             </li>
             <li {% if request.path == "/about" %} class="active" {% endif %}>
-                <a href="#">About us</a>
+                <a href="{% url 'about' %}">About us</a>
             </li>
             <li {% if request.path == "/blog" %} class="active" {% endif %}>
                 <a href="#">Blog</a>
