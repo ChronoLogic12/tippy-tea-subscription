@@ -41,25 +41,25 @@
             </a>
             <a href="#" data-target="mobile-nav" class="sidenav-trigger mide"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li {% if request.path == "/subscriptions" %} class="active" {% endif %}>
+                <li {% if request.path == "/subscriptions/" %} class="active" {% endif %}>
                     <a href="#">Subscriptions</a>
                 </li>
-                <li {% if request.path == "/about" %} class="active" {% endif %}>
+                <li {% if request.path == "/about/" %} class="active" {% endif %}>
                     <a href="{% url 'about' %}">About us</a>
                 </li>
-                <li {% if request.path == "/blog" %} class="active" {% endif %}>
-                    <a href="#">Blog</a>
+                <li {% if request.path == "/blog/" %} class="active" {% endif %}>
+                    <a href="{% url 'blog' %}">Blog</a>
                 </li>
                 {% if request.user.is_authenticated %}
-                <li {% if request.path == "/profile" %} class="active" {% endif %}>
+                <li {% if request.path == "/profile/" %} class="active" {% endif %}>
                     <a href="#">Profile</a>
                 </li>
                 <li><a href="{% url 'account_logout' %}">Logout</a></li>
                 {% else %}
-                <li {% if request.path == "/register" %} class="active" {% endif %}>
+                <li {% if request.path == "/accounts/register/" %} class="active" {% endif %}>
                     <a href="{% url 'account_signup' %}">Register</a>
                 </li>
-                <li {% if request.path == "/login" %} class="active" {% endif %}>
+                <li {% if request.path == "/accounts/login/" %} class="active" {% endif %}>
                     <a href="{% url 'account_login' %}">Login</a>
                 </li>
                 {% endif %}
@@ -67,25 +67,25 @@
         </div>
 
         <ul class="sidenav background-g2 white-text" id="mobile-nav">
-            <li {% if request.path == "/subscriptions" %} class="active" {% endif %}>
+            <li {% if request.path == "/subscriptions/" %} class="active" {% endif %}>
                 <a href="#">Subscriptions</a>
             </li>
-            <li {% if request.path == "/about" %} class="active" {% endif %}>
+            <li {% if request.path == "/about/" %} class="active" {% endif %}>
                 <a href="{% url 'about' %}">About us</a>
             </li>
-            <li {% if request.path == "/blog" %} class="active" {% endif %}>
-                <a href="#">Blog</a>
+            <li {% if request.path == "/blog/" %} class="active" {% endif %}>
+                <a href="{% url 'blog' %}">Blog</a>
             </li>
             {% if request.user.is_authenticated %}
-            <li {% if request.path == "/profile" %} class="active" {% endif %}>
+            <li {% if request.path == "/accounts/profile/" %} class="active" {% endif %}>
                 <a href="#">Profile</a>
             </li>
             <li><a href="{% url 'account_logout' %}">Logout</a></li>
             {% else %}
-            <li {% if request.path == "/register" %} class="active" {% endif %}>
+            <li {% if request.path == "/accounts/register/" %} class="active" {% endif %}>
                 <a href="{% url 'account_signup' %}">Register</a>
             </li>
-            <li {% if request.path == "/login" %} class="active" {% endif %}>
+            <li {% if request.path == "/accounts/login/" %} class="active" {% endif %}>
                 <a href="{% url 'account_login' %}">Login</a>
             </li>
             {% endif %}
