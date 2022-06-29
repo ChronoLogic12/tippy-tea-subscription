@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-class TestAboutView(TestCase):
+class TestBlogView(TestCase):
 
     def test_url_exists_at_desired_location(self):
         response = self.client.get('/blog/')
