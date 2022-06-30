@@ -21,6 +21,10 @@ body {
 	color: var(--g5) !important;
 }
 
+input {
+	color: var(--g5);
+}
+
 .row {
 	margin-top: 0;
 	margin-bottom: 0;
@@ -36,6 +40,11 @@ i,
 
 .capitalise {
 	text-transform: uppercase !important;
+}
+
+.divider {
+	width: 100%;
+	margin: 1rem 0;
 }
 
 a:hover,
@@ -165,7 +174,6 @@ body {
 }
 
 .custom-card {
-	/* width: 70% !important; */
 	padding: 1rem !important;
 	margin: 2rem;
 	border: var(--g5) 3px solid;
@@ -213,10 +221,6 @@ body {
 	margin: 0;
 }
 
-.auth input {
-	color: var(--g5);
-}
-
 .auth-button-container {
 	display: flex;
 	flex-direction: column;
@@ -230,7 +234,7 @@ body {
 /* media queries */
 
 @media only screen and (max-width: 600px) {
-	.custom-card {
+	.auth .custom-card {
 		width: 100%;
 	}
 }
@@ -248,10 +252,10 @@ body {
 	.hero-container {
 		flex-direction: row !important;
 	}
-	.auth .custom-card {
+	:is(.auth, .blog) .custom-card {
 		padding: 2rem !important;
 	}
-	.auth :is(.button, .button-secondary) {
+	:is(.auth, .blog) :is(.button, .button-secondary) {
 		padding: 1rem;
 	}
 }
