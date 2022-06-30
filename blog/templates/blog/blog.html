@@ -2,18 +2,39 @@
 {% load static %}
 
 {% block extra_css %}
-{% comment %}
-<link rel="stylesheet" href="{% static 'blog/css/blog.css' %}"> {% endcomment %}
+<link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
 {% endblock %}
 
 {% block extra_title %}
-- About
+- Blogs
 {% endblock %}
 
 {% block content %}
-<section class="about z-depth-4">
-    <div class="container about-container valign-wrapper">
-
+<section class="blog center-align z-depth-4">
+    <div class="container row">
+        {% for blog in blogs %}
+        <div class="col s12 m10 l8 offset-m1 offset-l2">
+            <div class="card custom-card">
+                <span class="card-title capitalise">{{ blog.title }}</span>
+                <div class="card-image">
+                    {% if blog.image_url %}
+                    <img class="responsive-img" src="{{ blog.image_url }}">
+                    {% endif %}
+                </div>
+                <div class="card-content">
+                    <p>{{ blog.content }}</p>
+                </div>
+                <span class="center">author: {{ blog.author }}</span>
+                {% if request.user.is_superuser %}
+                <div class="row card-action">
+                    <a class="left blue-text" href="#">edit</a>
+                    <a class="right red-text" href="#">delete</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="divider"></div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}
