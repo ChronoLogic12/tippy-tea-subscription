@@ -47,7 +47,7 @@
                 <li {% if request.path == "/about/" %} class="active" {% endif %}>
                     <a href="{% url 'about' %}">About us</a>
                 </li>
-                <li {% if request.path == "/blog/" %} class="active" {% endif %}>
+                <li {% if "/blog/" in request.path %} class="active" {% endif %}>
                     <a href="{% url 'blog' %}">Blog</a>
                 </li>
                 {% if request.user.is_authenticated %}
@@ -73,7 +73,7 @@
             <li {% if request.path == "/about/" %} class="active" {% endif %}>
                 <a href="{% url 'about' %}">About us</a>
             </li>
-            <li {% if request.path == "/blog/" %} class="active" {% endif %}>
+            <li {% if "/blog/" in request.path %} class="active" {% endif %}>
                 <a href="{% url 'blog' %}">Blog</a>
             </li>
             {% if request.user.is_authenticated %}
