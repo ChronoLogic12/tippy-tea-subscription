@@ -1,5 +1,5 @@
 from datetime import date
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -32,7 +32,7 @@ def add_blog(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully added new blog post!')
-            return redirect(reverse('add_blog'))
+            return redirect(reverse('blog'))
         else:
             messages.error(request, 'Failed to add post. Please ensure the form is valid.')
     else:
@@ -44,3 +44,15 @@ def add_blog(request):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def delete_blog(request, blog_id):
+    """ Remove blog from the database """
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only accessible by site owners.")
+        return redirect(reverse("blog"))
+    blog = get_object_or_404(Blog, pk=blog_id)
+    blog.delete()
+    messages.success(request, 'Product deleted!')
+    return redirect(reverse('blog'))

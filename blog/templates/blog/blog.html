@@ -33,7 +33,11 @@
                 {% if request.user.is_superuser %}
                 <div class="row card-action">
                     <a class="left blue-text" href="#">edit</a>
-                    <a class="right red-text" href="#">delete</a>
+                    <a class="right red-text dropdown-trigger" href="#" data-target="delete-confirmation">delete</a>
+                    <ul id='delete-confirmation' class='dropdown-content'>
+                        <li><a class="red-text" href="{% url 'delete_blog' blog.id %}">Confirm</a></li>
+                        <li><a class="grey-text" href="#!">Cancel</a></li>
+                    </ul>
                 </div>
                 {% endif %}
             </div>
