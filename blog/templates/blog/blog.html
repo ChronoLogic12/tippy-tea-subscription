@@ -12,6 +12,11 @@
 {% block content %}
 <section class="blog center-align z-depth-4">
     <div class="container row">
+        {% if request.user.is_superuser %}
+        <div class="col s12 m10 l8 offset-m1 offset-l2 add-blog-container">
+            <a class="primaryAction hoverable button" href="{% url 'add_blog' %}">Add New Post</a>
+        </div>
+        {% endif %}
         {% for blog in blogs %}
         <div class="col s12 m10 l8 offset-m1 offset-l2">
             <div class="card custom-card">
