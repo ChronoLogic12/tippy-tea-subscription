@@ -32,9 +32,10 @@
                 <span class="center">author: {{ blog.author }}</span>
                 {% if request.user.is_superuser %}
                 <div class="row card-action">
-                    <a class="left blue-text" href="#">edit</a>
-                    <a class="right red-text dropdown-trigger" href="#" data-target="delete-confirmation">delete</a>
-                    <ul id='delete-confirmation' class='dropdown-content'>
+                    <a class="left blue-text" href="{% url 'edit_blog' blog.id %}">edit</a>
+                    <a class="right red-text dropdown-trigger" href="#"
+                        data-target="delete-confirmation{{blog.id}}">delete</a>
+                    <ul id="delete-confirmation{{blog.id}}" class='dropdown-content'>
                         <li><a class="red-text" href="{% url 'delete_blog' blog.id %}">Confirm</a></li>
                         <li><a class="grey-text" href="#!">Cancel</a></li>
                     </ul>
