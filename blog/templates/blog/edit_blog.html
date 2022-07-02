@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+{% endblock %}
+
+{% block extra_title %}
+- Add Blog
+{% endblock %}
+
+{% block content %}
+<main class="main-container blog">
+    <div class="container hero-container valign-wrapper hero-content">
+        <div class="custom-card">
+            <h2 class="capitalise">Edit Blog Post</h2>
+
+            <form class="flow-text" method="POST" action="{% url 'edit_blog' blog.id %}">
+                {% csrf_token %}
+                {{ form }}
+                <div class="auth-button-container">
+                    <a class="button-secondary hoverable secondaryAction" href="{% url 'blog' %}">Cancel</a> <button
+                        class="primaryAction hoverable button" type="submit">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}
