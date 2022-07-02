@@ -84,3 +84,4 @@ Wireframes were created for mobile, tablet and desktop screen sizes with [Figma]
 
 - Code Institute learning material - general knowledge.
 - [Youtube tutorial](https://www.youtube.com/watch?v=GBgRMdjAx_c) from [Very Academy](https://www.youtube.com/c/veryacademy) on youtube on testing in django.
+- [Github Gist - tommorris](https://gist.github.com/tommorris/cd1048418cccfa346fef) - Create and login as super user in tests.
