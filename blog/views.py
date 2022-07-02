@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from .forms import BlogForm
-
 from .models import Blog
 
 def all_blogs(request):
@@ -44,6 +43,38 @@ def add_blog(request):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def edit_blog(request, blog_id):
+    """ Edit a blog post """
+    if not request.user.is_superuser:
+        messages.error(request, "Sorry, only accessible by site owners.")
+        return redirect(reverse("home"))
+    blog = get_object_or_404(Blog, pk=blog_id)
+    if request.method == 'POST':
+        form = BlogForm(request.POST, request.FILES, instance=blog)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully updated blog!')
+            return redirect(reverse('blog'))
+        else:
+            messages.error(request, 'Failed to update post. Please ensure the form is valid.')
+            return
+    else:
+        form = BlogForm(instance=blog)
+
+    if request.method == "GET":
+        template = 'blog/edit_blog.html'
+        context = {
+            'form': form,
+            'blog': blog,
+        }
+
+        return render(request, template, context)
+
+    else:
+        return
 
 
 @login_required
