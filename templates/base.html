@@ -129,6 +129,42 @@
     <!-- custom javascript -->
     <script src="{% static 'js/base.js' %}"></script>
     {% endblock %} {% block extra_js %} {% endblock %}
+
+    {% if messages %}
+    {% for message in messages %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    <script>
+        M.toast({
+            html: 'Error: {{message}}',
+            classes: 'red-text'
+        })
+    </script>
+    {% elif level == 30 %}
+    <script>
+        M.toast({
+            html: 'Warning: {{message}}',
+            classes: 'yellow-text'
+        })
+    </script>
+    {% elif level == 25 %}
+    <script>
+        M.toast({
+            html: '{{message}}',
+        })
+    </script>
+    {% else %}
+    <script>
+        M.toast({
+            html: '{{message}}',
+            classes: 'blue-text'
+        })
+    </script>
+    {% endif %}
+    {% endwith %}
+    {% endfor %}
+    {% endif %}
+
 </body>
 
 </html>
