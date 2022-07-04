@@ -10,8 +10,7 @@ def all_blogs(request):
     """ A view to show all blog posts """
 
     if request.method == "GET":
-        blogs = Blog.objects.all()
-        blogs.order_by("date")
+        blogs = Blog.objects.all().order_by("-date")
 
         context = {
             'blogs': blogs,
@@ -85,5 +84,5 @@ def delete_blog(request, blog_id):
         return redirect(reverse("blog"))
     blog = get_object_or_404(Blog, pk=blog_id)
     blog.delete()
-    messages.success(request, 'Product deleted!')
+    messages.success(request, 'Blog post deleted!')
     return redirect(reverse('blog'))
