@@ -6,3 +6,10 @@
 .add-blog-container {
 	margin-top: 2rem;
 }
+
+@media only screen and (max-width: 600px) {
+	.custom-card {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+}
