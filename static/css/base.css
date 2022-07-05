@@ -21,7 +21,8 @@ body {
 	color: var(--g5) !important;
 }
 
-input {
+input,
+textarea {
 	color: var(--g5);
 }
 
