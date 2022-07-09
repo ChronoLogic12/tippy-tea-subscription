@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,15 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'livereload',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django_countries',
+    'livereload',
+    'crispy_forms',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'home',
     'about',
     'blog',
+    'profiles',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +63,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'livereload.middleware.LiveReloadScript',
 ]
+
+if 'test' in sys.argv:
+     # modify MIDDLEWARE_CLASSES
+      MIDDLEWARE = list(MIDDLEWARE)
+      MIDDLEWARE.remove('livereload.middleware.LiveReloadScript')
 
 ROOT_URLCONF = 'tippy.urls'
 
@@ -114,6 +124,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': os.environ["DATABASE"]
+# }
 
 
 # Password validation
