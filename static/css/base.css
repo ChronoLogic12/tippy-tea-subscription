@@ -48,6 +48,10 @@ i,
 	margin: 1rem 0;
 }
 
+fieldset {
+	border: none;
+}
+
 a:hover,
 i:hover,
 button:hover {
