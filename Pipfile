@@ -9,6 +9,10 @@ django-environ = "*"
 django-allauth = "*"
 coverage = "*"
 livereload = "*"
+django-countries = "*"
+django-crispy-forms = "*"
+dj-database-url = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
