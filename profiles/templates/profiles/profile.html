@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<main class="main-container">
+    <div class="container profile row hero-container valign-wrapper">
+        <div class="custom-card col s12 l6">
+            <h2 class="capitalise">Profile</h2>
+            <form action="{% url 'profile' %}" method="POST" id="profile-update">
+                {% csrf_token %}
+                {{ form.full_name }}
+                {{ form.email }}
+                {{ form.phone_number }}
+                {{ form.street_address1 }}
+                {{ form.street_address2 }}
+                {{ form.town_or_city }}
+                {{ form.county }}
+                {{ form.postcode }}
+                {{ form.country }}
+                <p>
+                    <label for="id_mailing">
+                        {{form.mailing}}
+                        <span>Registered for Mailing list</span>
+                    </label>
+                </p>
+                <button class="button">Update information</button>
+            </form>
+        </div>
+        <div class="custom-card col s12 l6">
+            <div class="row card-action center-align">
+                <a class="red-text dropdown-trigger capitalise" href="#"
+                    data-target="delete-confirmation{{user_id}}">Delete account</a>
+                <ul id="delete-confirmation{{user_id}}" class='dropdown-content'>
+                    <li><a class="red-text" href="{% url 'delete_profile' %}">Confirm</a></li>
+                    <li><a class="grey-text" href="#!">Cancel</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'profile/js/profile.js' %}">
+</script>
+{% endblock %}
