@@ -8,16 +8,11 @@ class TestMailingModel(TestCase):
     def setUp(self):
         string = get_random_string(20)
         self.test_email = 'test@example.com'
-        self.user = User.objects.create_user(username='test_user', password='testpassword')
-        self.client.login(username='test_user', password='testpassword')
-        self.email = Mailing.objects.create(email=f'{string}@example.com', user=self.user)
+        self.email = Mailing.objects.create(email=f'{string}@example.com')
         
     def test_email_added(self):
         self.assertEqual(len(Mailing.objects.all()), 1)
         return_email = Mailing.objects.get(email=self.email)
         self.assertEqual(return_email, self.email)
     
-    def test_user_added(self):
-        return_email = Mailing.objects.get(user=self.user)
-        self.assertEqual(return_email.user, self.user)
 
