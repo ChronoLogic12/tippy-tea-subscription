@@ -1,0 +1,96 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block meta %}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon"
+        href="https://res.cloudinary.com/chronologic12/image/upload/v1655720179/tippy/tippy-favicon_uwbvg7.png"
+        type="image/png" />
+    {% endblock %}{% block corecss %}
+    <!-- materialize -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <!-- custom style sheet-->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    {% endblock %}
+    {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/custom-error.css' %}" />
+    {% endblock %}
+
+    <title>Tippy {% block extra_title %}Error 404{% endblock %}</title>
+</head>
+
+<body>
+    {% if messages %} {% endif %}
+
+    <main class="main-container">
+        <div class="container hero-container valign-wrapper error">
+            <div class="custom-card center">
+                <h2 class="capitalise">Error 404</h2>
+                <p class="flow-text">Page not found<p>
+                        <a href="{% url 'home' %}" class="button capitalise">
+                            Home
+                        </a>
+            </div>
+        </div>
+    </main>
+
+    {% block corejs %}
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- materialize -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/1d3dfbd135.js" crossorigin="anonymous"></script>
+    <!-- custom javascript -->
+    <script src="{% static 'js/base.js' %}"></script>
+    {% endblock %} {% block extra_js %} {% endblock %}
+
+    {% if messages %}
+    {% for message in messages %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    <script>
+        M.toast({
+            html: 'Error: {{message}}',
+            classes: 'red-text'
+        })
+    </script>
+    {% elif level == 30 %}
+    <script>
+        M.toast({
+            html: 'Warning: {{message}}',
+            classes: 'yellow-text'
+        })
+    </script>
+    {% elif level == 25 %}
+    <script>
+        M.toast({
+            html: '{{message}}',
+        })
+    </script>
+    {% else %}
+    <script>
+        M.toast({
+            html: '{{message}}',
+            classes: 'blue-text'
+        })
+    </script>
+    {% endif %}
+    {% endwith %}
+    {% endfor %}
+    {% endif %}
+
+</body>
+
+</html>
