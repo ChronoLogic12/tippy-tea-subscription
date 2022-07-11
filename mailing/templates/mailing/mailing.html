@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+
+{% endblock %}
+
+{% block extra_title %}
+- Sign up for newsletter
+{% endblock %}
+
+{% block content %}
+<main class="main-container newsletter">
+    <div class="container hero-container valign-wrapper">
+        <div class="custom-card">
+            <h3 class="capitalise">register for our newsletter</h3>
+            <p class="flow-text">Stay up to date with all our latest updates, offers and deals but registering for our
+                mailing list.</p>
+            <form class="login flow-text" method="POST" action="{% url 'mailing' %}">
+                {% csrf_token %}
+                {{ form.email }}
+                <div class="auth-button-container">
+                    <button class="hoverable button" type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}
