@@ -239,7 +239,7 @@ body {
 /* media queries */
 
 @media only screen and (max-width: 600px) {
-	.auth .custom-card {
+	:is(.auth, .error) .custom-card {
 		width: 100%;
 	}
 }
@@ -257,10 +257,10 @@ body {
 	.hero-container {
 		flex-direction: row !important;
 	}
-	:is(.auth, .blog) .custom-card {
+	:is(.auth, .blog, .error) .custom-card {
 		padding: 2rem !important;
 	}
-	:is(.auth, .blog) :is(.button, .button-secondary) {
+	:is(.auth, .blog, .error) :is(.button, .button-secondary) {
 		padding: 1rem;
 	}
 }
