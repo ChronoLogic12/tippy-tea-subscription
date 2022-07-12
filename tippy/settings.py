@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'blog',
     'profiles',
     'mailing',
+    'subscriptions',
 ]
 
 MIDDLEWARE = [
@@ -128,7 +129,7 @@ DATABASES = {
 }
 
 # DATABASES = {
-#     'default': os.environ["DATABASE"]
+#     'default': dj_database_url.parse(os.environ["DATABASE"])
 # }
 
 
@@ -177,7 +178,7 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-if 'DEVELOPMENT' in os.environ:
+if DEBUG == True:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     EMAIL_HOST_USER = 'tippy@example.som'
 else:
