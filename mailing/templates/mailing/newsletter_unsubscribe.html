@@ -14,7 +14,7 @@
     <div class="container hero-container valign-wrapper">
         <div class="custom-card">
             <h3 class="capitalise">Unsubscribe from our newsletter</h3>
-            <p class="flow-text">Submitting you email bellow will remove you from our mailing list. </p>
+            <p class="flow-text">Submitting your email bellow will remove it from our mailing list. </p>
             <form class="flow-text" method="POST" action="{% url 'newsletter_unsubscribe' %}">
                 {% csrf_token %}
                 {{ form.email }}
