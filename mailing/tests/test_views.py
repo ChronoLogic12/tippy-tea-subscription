@@ -73,7 +73,7 @@ class TestSendNewsletterView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'mailing/send_newsletter.html')
 
-    def test_edit_title_returns_correct_data(self):
+    def test_edit_data_returns_correct_data(self):
         self.create_user(True)
         self.client.login(username=self.username, password=self.password, email="test@example.com")
         string = get_random_string(20)
@@ -103,3 +103,29 @@ class TestSendNewsletterView(TestCase):
             {'subject': string, 'message': string,})
 
         self.assertRedirects(response, '/accounts/login/?next=/mailing/send-newsletter/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+
+
+class TestNewsletterUnsubscribeView(TestCase):
+    def setUp(self):
+        string = get_random_string(20)
+        self.test_email = f'{string}@example.com'
+        self.client.post(reverse('mailing'), {'email': self.test_email })
+
+    def test_url_exists_at_desired_location(self):
+        response = self.client.get('/mailing/newsletter-unsubscribe/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_url_accessible_by_name(self):
+        response = self.client.get(reverse('newsletter_unsubscribe'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get(reverse('newsletter_unsubscribe'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'mailing/newsletter_unsubscribe.html')
+
+    def test_delete_email_returns_correct_data(self):
+        response = self.client.post(reverse('newsletter_unsubscribe'), {'email': self.test_email })
+        email_exists = Mailing.objects.filter(email=self.test_email).exists()
+        self.assertRedirects(response, '/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+        self.assertEqual(email_exists, False)
