@@ -16,6 +16,7 @@ def mailing(request):
             if not Mailing.objects.filter(email=form.cleaned_data['email']).exists():
                 form.save()
                 messages.success(request, 'Thank you for subscribing to our mailing list')
+                return(redirect(reverse('home')))
             else:
                 messages.info(request, "This email is already registered.")
         else:

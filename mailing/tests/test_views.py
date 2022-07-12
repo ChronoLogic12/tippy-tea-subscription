@@ -33,7 +33,7 @@ class TestUpdateMailingView(TestCase):
         response = self.client.post(reverse('mailing'), {'email': self.test_email })
         email_added = Mailing.objects.filter(email=self.test_email).exists()
 
-        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(response, '/', status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
         self.assertEqual(email_added, True)
 
 
