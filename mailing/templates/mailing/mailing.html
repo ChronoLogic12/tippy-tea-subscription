@@ -16,7 +16,7 @@
             <h3 class="capitalise">register for our newsletter</h3>
             <p class="flow-text">Stay up to date with all our latest updates, offers and deals but registering for our
                 mailing list.</p>
-            <form class="login flow-text" method="POST" action="{% url 'mailing' %}">
+            <form class="flow-text" method="POST" action="{% url 'mailing' %}">
                 {% csrf_token %}
                 {{ form.email }}
                 <div class="auth-button-container">
