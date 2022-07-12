@@ -52,14 +52,42 @@ def send_newsletter(request):
                     email,
                     fail_silently=False,
                 )
-
             messages.success(request, 'Newsletter successfully sent')
+            return(redirect(reverse('send_newsletter')))
         else:
             messages.info(request, "Failed to send newsletter. Please ensure the form is valid.")
     else:
         form = MassEmailForm()
 
     template = 'mailing/send_newsletter.html'
+    
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
+
+
+def newsletter_unsubscribe(request):
+    """ Remove an email address from the site mailing lits """
+    if request.method == 'POST':
+        form = MailingForm(request.POST or None)
+        if form.is_valid():
+            if Mailing.objects.filter(email=form.cleaned_data['email']).exists():
+                Mailing.objects.filter(email=form.cleaned_data['email']).delete()
+                messages.success(request, 'Email successfully removed from mailing list.')
+                return(redirect(reverse('home')))
+            else:
+                messages.info(request, "This email is not currently registered.")
+        else:
+            messages.error(request, "Newsletter unsubscribe failed. Please ensure the form is valid.")
+    else:
+        if request.user.is_authenticated:
+            form = MailingForm(instance=request.user)
+        else:
+            form = MailingForm()
+
+    template = 'mailing/newsletter_unsubscribe.html'
     
     context = {
         'form': form,
