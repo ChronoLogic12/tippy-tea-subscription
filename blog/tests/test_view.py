@@ -5,7 +5,6 @@ from django.utils.crypto import get_random_string
 from blog.models import Blog
 
 from django.contrib.auth.models import User
-from django.test.client import Client
 
 
 class TestAllBlogsView(TestCase):
