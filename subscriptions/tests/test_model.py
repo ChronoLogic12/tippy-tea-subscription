@@ -1,7 +1,5 @@
-from django.shortcuts import get_object_or_404
 from django.test import TestCase
 from subscriptions.models import Subscription
-from subscriptions.forms import SubscriptionForm
 from django.utils.crypto import get_random_string
 import random
 
@@ -14,7 +12,6 @@ class TestSubscriptionsModel(TestCase):
         self.test_weight = float(random.randrange(0, 500))
         self.test_image_url = 'www.test-example.com'
 
-        self.test_email = 'test@example.com'
         self.test_subscription = Subscription.objects.create(
             name=self.test_name, 
             description=self.test_description, 
