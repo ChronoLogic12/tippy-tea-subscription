@@ -1,0 +1,47 @@
+.subscriptions {
+	display: grid !important;
+	justify-content: center !important;
+	width: 100%;
+}
+
+.subscriptions img {
+	border-radius: 5% !important;
+	width: 100%;
+}
+
+.subscriptions .custom-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center !important;
+}
+
+.select-container {
+	margin-top: auto;
+	width: 100%;
+}
+
+.select-container > div {
+	margin: 1rem;
+}
+
+.button {
+	padding: 0.5rem 1rem;
+}
+
+@media only screen and (min-width: 600px) {
+	.subscriptions {
+		width: 70%;
+		margin: auto;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.subscriptions {
+		grid-template-columns: 1fr 1fr 1fr;
+		width: 100%;
+	}
+
+	.subscriptions .custom-card {
+		height: 100%;
+	}
+}
