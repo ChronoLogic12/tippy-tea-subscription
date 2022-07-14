@@ -4,6 +4,10 @@
     <img src="readme-assets/tippy-logo-round.png" width="200px"/>
 </p>
 
+[Tippy - live site](https://tippy-tea-subscription.herokuapp.com/)
+
+_*This site is for training purposes only, the company is fictional and no orders will be charged or receive products.* _
+
 ## **About Tippy**
 
 Tippy is a specialist subscription service bringing the greatest tastes from the world of teas to your door. Our experts work with a vast network of growers from around the world to source the best for you each and every month. Whether you're looking to discover something new or simply want the best from your morning cup, explore more of what you love with Tippy.
@@ -20,7 +24,10 @@ Tippy is a specialist subscription service bringing the greatest tastes from the
       - [As a return user/customer -](#as-a-return-usercustomer--)
       - [As an admin user -](#as-an-admin-user--)
     - [Wireframes](#wireframes)
+    - [Design](#design)
+  - [Database schema](#database-schema)
   - [Credits](#credits)
+    - [Services](#services)
     - [Content](#content)
     - [Media](#media)
     - [Help and Info](#help-and-info)
@@ -62,13 +69,34 @@ For user stories checklist please view the google sheets table [here](https://do
 
 ### Wireframes
 
-Wireframes were created for mobile, tablet and desktop screen sizes with [Figma](https://www.figma.com)
+Wireframes were created for mobile, tablet and desktop screen sizes with [Figma](https://www.figma.com).
 
 - [Mobile](readme-assets/tippy-wireframes-mobile.png)
 - [Tablet](readme-assets/tippy-wireframes-tablet.png)
 - [Desktop](readme-assets/tippy-wireframes-desktop.png)
 
+### Design
+
+As tippy is targeted as a specialist and high end service I wanted the site to reflect this with a clean and clear design. I chose to use a fairly soft pallet in shades of green to tie in to the product and give a somewhat premium feel and included a dark raspberry accent/action colour to compliment.
+
+<p align="center">
+    <img src="readme-assets/tippy-colour-palette.PNG" width="600px"/>
+</p>
+
+## Database schema
+
 ## Credits
+
+### Services
+
+- [Materialize](https://materializecss.com/) - layout, interactive components, element styling, text colours and icons.
+- [Google fonts](https://fonts.google.com/).
+- [Font Awesome](https://fontawesome.com/) - general additional icons.
+- [Django](https://www.djangoproject.com/) python framework.
+- [Heroku](https://www.heroku.com/) application host.
+- [Amazon S3](https://aws.amazon.com) - cloud storage.
+- [Gunicorn](https://gunicorn.org/) - wsgi server.
+- [MySQL](https://www.sqlite.org/index.html) - database.
 
 ### Content
 
@@ -79,9 +107,16 @@ Wireframes were created for mobile, tablet and desktop screen sizes with [Figma]
 
 - [Cloudinary](https://cloudinary.com/console/c-087b7b36d5737750ed37ab5fb60479/getting-started) CDN was used for cloud based image storage and servicing.
 - Images were sourced from [Pexels](https://www.pexels.com/) and can be found in [this collection](https://www.pexels.com/collections/tippy-w5mdqpg/).
+- The brand logo and favicon were created my me using [Adobe Ilistrator](https://www.adobe.com/uk/products/illustrator.html).
 
 ### Help and Info
 
 - Code Institute learning material - general knowledge.
+- Code Institute - 'boutique ado' learning project - specific django knowledge.
+- [Codecademy](https://www.codecademy.com/learn) - general knowledge.
+- [w3schools](https://www.w3schools.com/) - general knowledge.
+- [MND Web Docs](https://developer.mozilla.org/en-US/) - general knowledge.
+- [Stack Overflow](https://stackoverflow.com/) - debugging.
+- [Django documentation](https://docs.djangoproject.com/en/4.0/)
 - [Youtube tutorial](https://www.youtube.com/watch?v=GBgRMdjAx_c) from [Very Academy](https://www.youtube.com/c/veryacademy) on youtube on testing in django.
 - [Github Gist - tommorris](https://gist.github.com/tommorris/cd1048418cccfa346fef) - Create and login as super user in tests.
