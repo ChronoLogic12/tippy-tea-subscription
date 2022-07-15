@@ -1,0 +1,65 @@
+.chevron-container {
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	bottom: 0;
+}
+
+.chevron-container i {
+	font-size: 4rem;
+}
+
+#how-it-works {
+	min-height: 100%;
+	display: grid;
+}
+
+.how-it-works-card {
+	margin: 0;
+	padding: 2% !important;
+	height: 100% !important;
+	display: flex;
+	flex-direction: column;
+	align-items: center !important;
+	justify-content: space-evenly;
+}
+
+.how-it-works-card p {
+	margin: auto;
+	padding: 1rem;
+}
+
+.how-it-works-card i {
+	color: var(--p1) !important;
+	cursor: default !important;
+	margin-bottom: auto;
+}
+
+.how-it-works-card:nth-child(odd) {
+	background-color: var(--g2) !important;
+}
+
+.how-it-works-card:nth-child(even) {
+	background-color: var(--g4) !important;
+	color: var(--g1) !important;
+}
+
+@media only screen and (min-width: 600px) {
+	.home .custom-card {
+		width: 50% !important;
+		margin: 1rem !important;
+	}
+}
+
+@media only screen and (max-width: 300px) {
+	.container {
+		width: 100% !important;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	#how-it-works {
+		grid-template-columns: 1fr 1fr 1fr;
+		width: 100%;
+	}
+}

@@ -1,67 +1,62 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'home/css/index.css' %}">
+{% endblock %}
+
 {% block extra_title %}
 - Home
 {% endblock %}
 
 {% block content %}
-<section class="main-container z-depth-4">
+<section class="main-container z-depth-4 home">
     <div class="container hero-container valign-wrapper">
-        <div class="center-align custom-card z-depth-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscingelit. Suspendisse
-            finibus leo nibh, eget volutpat orci fringilla et. Mauris sit amet convallis velit. Sed dapibus
-            venenatis arcu non facilisis. Nullam consectetur elementum elit, eget porttitor elit posuere vel. Duis
-            eget tempor ante. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris tempus magna sit
-            amet ligula accumsan, at dictum odio sagittis. Donec porta ullamcorper diam ac commodo. </div>
+        <div class=" center-align custom-card z-depth-4">
+            The highest quality teas from around the world, curated by experts and delivered to your home every month.
+            With plans for individual tea lovers, families, and for those who enjoy trying something new; Tippy has
+            something for everyone who loves great tea.
+        </div>
         <div class="center-align">
-            <a href="#" class="button capitalise flow-text hoverable">Join Now!</a>
+            <a href="{% url 'subscriptions' %}" class="button capitalise flow-text hoverable">Join Now!</a>
         </div>
     </div>
     <div class="chevron-container">
         <a href="#how-it-works"><i class="material-icons">expand_more</i></a>
     </div>
 </section>
-<section id="how-it-works" class="container-fluid row">
+<section class="container-fluid row">
     <h4 class="capitalise center-align">How it works</h4>
-    <div class="col m12 l4 center-align card how-it-works-card">
-        <h5>Pick a Subscription</h5>
-        <i class="large fa-solid fa-check"></i>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse finibus leo nibh, eget volutpat orci
-            fringilla et. Mauris sit amet convallis velit. Sed dapibus venenatis arcu non facilisis. Nullam consectetur
-            elementum elit, eget porttitor elit posuere vel. Duis eget tempor ante. Interdum et malesuada fames ac ante
-            ipsum primis in faucibus. Mauris tempus magna sit amet ligula accumsan, at dictum odio sagittis. Donec porta
-            ullamcorper diam ac commodo. Nulla facilisis eleifend dolor a hendrerit. Cras risus ipsum, faucibus et
-            cursus a, efficitur eu leo. Nulla laoreet quam in velit hendrerit, commodo consectetur velit auctor.
-            Suspendisse vel pellentesque lorem, vitae scelerisque nibh. Aliquam suscipit facilisis odio at eleifend. Nam
-            aliquam fermentum tortor, et elementum orci facilisis non. In et ex id mi elementum aliquam. Ut suscipit
-            faucibus bibendum.</p>
-    </div>
-    <div class="col m12 l4 center-align card how-it-works-card">
-        <h5>Only the Best</h5>
-        <i class="large fa-solid fa-trophy"></i>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse finibus leo nibh, eget volutpat orci
-            fringilla et. Mauris sit amet convallis velit. Sed dapibus venenatis arcu non facilisis. Nullam consectetur
-            elementum elit, eget porttitor elit posuere vel. Duis eget tempor ante. Interdum et malesuada fames ac ante
-            ipsum primis in faucibus. Mauris tempus magna sit amet ligula accumsan, at dictum odio sagittis. Donec porta
-            ullamcorper diam ac commodo. Nulla facilisis eleifend dolor a hendrerit. Cras risus ipsum, faucibus et
-            cursus a, efficitur eu leo. Nulla laoreet quam in velit hendrerit, commodo consectetur velit auctor.
-            Suspendisse vel pellentesque lorem, vitae scelerisque nibh. Aliquam suscipit facilisis odio at eleifend. Nam
-            aliquam fermentum tortor, et elementum orci facilisis non. In et ex id mi elementum aliquam. Ut suscipit
-            faucibus bibendum.</p>
-    </div>
-    <div class="col m12 l4 center-align card how-it-works-card">
-        <h5>Enjoy!</h5>
-        <i class="large fa-solid fa-mug-saucer"></i>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse finibus leo nibh, eget volutpat orci
-            fringilla et. Mauris sit amet convallis velit. Sed dapibus venenatis arcu non facilisis. Nullam consectetur
-            elementum elit, eget porttitor elit posuere vel. Duis eget tempor ante. Interdum et malesuada fames ac ante
-            ipsum primis in faucibus. Mauris tempus magna sit amet ligula accumsan, at dictum odio sagittis. Donec porta
-            ullamcorper diam ac commodo. Nulla facilisis eleifend dolor a hendrerit. Cras risus ipsum, faucibus et
-            cursus a, efficitur eu leo. Nulla laoreet quam in velit hendrerit, commodo consectetur velit auctor.
-            Suspendisse vel pellentesque lorem, vitae scelerisque nibh. Aliquam suscipit facilisis odio at eleifend. Nam
-            aliquam fermentum tortor, et elementum orci facilisis non. In et ex id mi elementum aliquam. Ut suscipit
-            faucibus bibendum.</p>
+    <div id="how-it-works">
+        <div class="center-align card how-it-works-card">
+            <h5>Pick a Subscription</h5>
+            <i class="large fa-solid fa-check"></i>
+            <p>First, choose the subscription that's right for you. Our CLASSIC tier offers enough for 30-40 cups (100g)
+                each and every month, perfect for your morning brew. The FAMILY tier offers our same amazing quality but
+                at 300g a month it's ideal for the whole family. For those with an adventurous spirit, the DISCOVERY
+                tier is for you. At this tier we'll send you FOUR different teas every month so you'll always have a
+                fresh, exciting new taste waiting for you every time.
+            </p>
+        </div>
+        <div class="center-align card how-it-works-card">
+            <h5>Only the Best</h5>
+            <i class="large fa-solid fa-trophy"></i>
+            <p>Here at TIPPY we believe in quality, diversity and fairness. You can be confident that every time you
+                drink
+                tea from us that it's Finest Tippy Golden Flowery Orange Pekoe around! We source our tea from around the
+                world, personally curated and selected by our expert buyers and always 100% fair trade. And with our
+                recyclable packaging guarantee you can rest easy knowing you have the highest quality product AND a
+                clear conscious.
+            </p>
+        </div>
+        <div class="center-align card how-it-works-card">
+            <h5>Enjoy!</h5>
+            <i class="large fa-solid fa-mug-saucer"></i>
+            <p>We take care of everything! Your order will be delivered to your door every month along with information
+                about your tea, like where it's from, who it was grown by and the perfect way to brew it. So all that
+                left for you to do is relax, put the kettle on and ready your favorite mug.
+            </p>
+        </div>
     </div>
 </section>
 {% endblock %}

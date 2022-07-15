@@ -95,6 +95,13 @@ button:hover {
 	text-shadow: 0 0 3px var(--g1) !important;
 }
 
+.custom-card {
+	padding: 1rem !important;
+	margin: 2rem;
+	border: var(--g5) 3px solid;
+	background-color: rgba(26, 49, 30, 0.7);
+}
+
 /* nav */
 nav a {
 	text-transform: uppercase !important;
@@ -178,44 +185,6 @@ body {
 	height: 100% !important;
 }
 
-.custom-card {
-	padding: 1rem !important;
-	margin: 2rem;
-	border: var(--g5) 3px solid;
-	background-color: rgba(26, 49, 30, 0.7);
-}
-
-.chevron-container {
-	width: 100%;
-	text-align: center;
-	position: absolute;
-	bottom: 0;
-	font-size: 2rem !important;
-}
-
-.chevron-container i {
-	font-size: 4rem;
-}
-
-.how-it-works-card {
-	margin: 0;
-	padding: 2% !important;
-}
-
-.how-it-works-card i {
-	color: var(--p2) !important;
-	text-shadow: 0 0 3px var(--p1);
-}
-
-.how-it-works-card:nth-child(odd) {
-	background-color: var(--g2) !important;
-}
-
-.how-it-works-card:nth-child(even) {
-	background-color: var(--g4) !important;
-	color: var(--g1) !important;
-}
-
 /* auth */
 
 .auth label {
@@ -241,6 +210,9 @@ body {
 @media only screen and (max-width: 600px) {
 	:is(.auth, .error) .custom-card {
 		width: 100%;
+	}
+	.main-container {
+		min-height: calc(100vh - 56px);
 	}
 }
 
