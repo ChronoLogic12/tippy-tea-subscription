@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 python-decouple = "*"
-django-environ = "*"
 django-allauth = "*"
 coverage = "*"
 livereload = "*"
@@ -13,6 +12,11 @@ django-countries = "*"
 django-crispy-forms = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
+gunicorn = "*"
+stripe = "*"
+dj-stripe = "*"
+django-storages = "*"
+boto3 = "*"
 
 [dev-packages]
 
