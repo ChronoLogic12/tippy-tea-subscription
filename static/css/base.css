@@ -68,6 +68,12 @@ button:hover {
 	background-color: var(--g1) !important;
 }
 
+.hidden {
+	position: absolute !important;
+	top: -5000px !important;
+	left: -5000px !important;
+}
+
 .button {
 	padding: 0.5rem;
 	margin: 0.5rem 0;
