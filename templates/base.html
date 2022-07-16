@@ -42,7 +42,7 @@
             <a href="#" data-target="mobile-nav" class="sidenav-trigger mide"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li {% if request.path == "/subscriptions/" %} class="active" {% endif %}>
-                    <a href="#">Subscriptions</a>
+                    <a href="{% url 'subscriptions' %}">Subscriptions</a>
                 </li>
                 <li {% if request.path == "/about/" %} class="active" {% endif %}>
                     <a href="{% url 'about' %}">About us</a>
@@ -68,7 +68,7 @@
 
         <ul class="sidenav background-g2 white-text" id="mobile-nav">
             <li {% if request.path == "/subscriptions/" %} class="active" {% endif %}>
-                <a href="#">Subscriptions</a>
+                <a href="{% url 'subscriptions' %}">Subscriptions</a>
             </li>
             <li {% if request.path == "/about/" %} class="active" {% endif %}>
                 <a href="{% url 'about' %}">About us</a>
@@ -113,6 +113,11 @@
                     <p>
                         Be the first to hear about our monthly news and offers! <br>
                         Sign up to our newsletter <a class="blue-text" href="{% url 'mailing' %}">here.</a>
+                    </p>
+                </div>
+                <div class="col s12">
+                    <p>
+                        <i>*Tippy is a fictional company, no placed orders will or charged or received*</i>
                     </p>
                 </div>
             </div>
