@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY", default="")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEVELOPMENT', '')
+DEBUG = not 'USE_AWS' in os.environ
 
 ALLOWED_HOSTS = ['tippy-tea-subscription.herokuapp.com', '127.0.0.1']
 
@@ -126,7 +126,7 @@ WSGI_APPLICATION = 'tippy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-if 'DATABASE_URL' in os.environ:
+if not os.environ.get('DATABASE_URL',  default="") == "":
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
@@ -138,10 +138,10 @@ else:
         }
     }
 
-# DATABASES = {
-#     'default': dj_database_url.parse(os.environ["DATABASE"])
-# }
 
+# DATABASES = {
+#     'default': dj_database_url.parse('postgres://cmkyeegtwmdpfk:c31dc93f3b733fbed82ff4a64b83c0f75f8fdf8afd95a61dbb51077f36b280fe@ec2-63-34-180-86.eu-west-1.compute.amazonaws.com:5432/daqm1b7grs2qn8')
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -173,8 +173,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -189,15 +187,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-# Code Institute boutique ado
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 if 'USE_AWS' in os.environ:
     AWS_S3_OBJECT_PARAMETERS = {
@@ -223,9 +212,9 @@ STRIPE_TEST_SECRET_KEY = config("STRIPE_SECRET_KEY", default="")
 DJSTRIPE_WEBHOOK_SECRET = config("STRIPE_WH_SECRET", default="")
 DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 
-if DEBUG == True:
+if not 'USE_AWS' in os.environ:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    EMAIL_HOST_USER = 'tippy@example.som'
+    EMAIL_HOST_USER = 'tippy@example.com'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_USE_TLS = True
