@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .models import Profile
+from mailing.models import Mailing
 from .forms import ProfileForm
 
 @login_required
@@ -13,6 +14,16 @@ def profile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
+            if form.cleaned_data['mailing']:
+                if not Mailing.objects.all().filter(email=profile.email).exists():
+                    Mailing.objects.create(email=form.cleaned_data['email'])
+                    messages.success(request, 'Email successfully added to newsletter')
+                else:
+                    Mailing.objects.filter(email=profile.email).update(email=form.cleaned_data['email'])
+            else:
+                if Mailing.objects.all().filter(email=profile.email).exists():
+                    Mailing.objects.all().filter(email=profile.email).delete()
+                    messages.info(request, 'Email successfully removed from mailing list')
             form.save()
             messages.success(request, 'Profile updated successfully')
         else:
@@ -21,7 +32,6 @@ def profile(request):
         form = ProfileForm(instance=profile)
 
     template = 'profiles/profile.html'
-    mailing = profile.mailing
     context = {
         'form': form,
         'on_profile_page': True,

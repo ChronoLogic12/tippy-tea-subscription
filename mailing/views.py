@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 
 from .models import Mailing
+from profiles.models import Profile
 from .forms import MailingForm, MassEmailForm
 
 
@@ -16,6 +17,8 @@ def mailing(request):
             if not Mailing.objects.filter(email=form.cleaned_data['email']).exists():
                 form.save()
                 messages.success(request, 'Thank you for subscribing to our mailing list')
+                if Profile.objects.filter(email=form.cleaned_data['email']).exists():
+                    Profile.objects.filter(email=form.cleaned_data['email']).update(mailing=True)
                 return(redirect(reverse('home')))
             else:
                 messages.info(request, "This email is already registered.")
@@ -23,7 +26,7 @@ def mailing(request):
             messages.error(request, "Signup failed. Please ensure the form is valid.")
     else:
         if request.user.is_authenticated:
-            form = MailingForm(instance=request.user)
+            form = MailingForm(instance=request.user.profile)
         else:
             form = MailingForm()
 
@@ -77,6 +80,8 @@ def newsletter_unsubscribe(request):
             if Mailing.objects.filter(email=form.cleaned_data['email']).exists():
                 Mailing.objects.filter(email=form.cleaned_data['email']).delete()
                 messages.success(request, 'Email successfully removed from mailing list.')
+                if Profile.objects.filter(email=form.cleaned_data['email']).exists():
+                    Profile.objects.filter(email=form.cleaned_data['email']).update(mailing=False)
                 return(redirect(reverse('home')))
             else:
                 messages.info(request, "This email is not currently registered.")
@@ -84,7 +89,7 @@ def newsletter_unsubscribe(request):
             messages.error(request, "Newsletter unsubscribe failed. Please ensure the form is valid.")
     else:
         if request.user.is_authenticated:
-            form = MailingForm(instance=request.user)
+            form = MailingForm(instance=request.user.profile)
         else:
             form = MailingForm()
 

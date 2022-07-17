@@ -29,6 +29,14 @@
         </div>
         <div class="custom-card col s12 l6">
             <div class="row card-action center-align">
+                {% if user.is_superuser %}
+                <div class="center col s12">
+                    <a class="button" href="{% url 'send_newsletter' %}">Send newsletter</a>
+                </div>
+                {% endif %}
+                <form action="{% url 'customer-portal' %}" method="POST">
+                    <button class="button">Update</button>
+                </form>
                 <a class="red-text dropdown-trigger capitalise" href="#"
                     data-target="delete-confirmation{{user_id}}">Delete account</a>
                 <ul id="delete-confirmation{{user_id}}" class='dropdown-content'>
