@@ -15,8 +15,8 @@ psycopg2-binary = "*"
 gunicorn = "*"
 stripe = "*"
 dj-stripe = "*"
-django-storages = "*"
 boto3 = "*"
+django-storages = "*"
 
 [dev-packages]
 
