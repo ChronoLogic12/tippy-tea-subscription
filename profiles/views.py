@@ -5,39 +5,44 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile
 from mailing.models import Mailing
 from .forms import ProfileForm
+from django.views.defaults import server_error
 
 @login_required
 def profile(request):
     """ Display the user's profile """
-    profile = get_object_or_404(Profile, user=request.user)
+    try:
+        profile = get_object_or_404(Profile, user=request.user)
 
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile)
-        if form.is_valid():
-            if form.cleaned_data['mailing']:
-                if not Mailing.objects.all().filter(email=profile.email).exists():
-                    Mailing.objects.create(email=form.cleaned_data['email'])
-                    messages.success(request, 'Email successfully added to newsletter')
+        if request.method == 'POST':
+            form = ProfileForm(request.POST, instance=profile)
+            if form.is_valid():
+                if form.cleaned_data['mailing']:
+                    if not Mailing.objects.all().filter(email=profile.email).exists():
+                        Mailing.objects.create(email=form.cleaned_data['email'])
+                        messages.success(request, 'Email successfully added to newsletter')
+                    else:
+                        Mailing.objects.filter(email=profile.email).update(email=form.cleaned_data['email'])
                 else:
-                    Mailing.objects.filter(email=profile.email).update(email=form.cleaned_data['email'])
+                    if Mailing.objects.all().filter(email=profile.email).exists():
+                        Mailing.objects.all().filter(email=profile.email).delete()
+                        messages.info(request, 'Email successfully removed from mailing list')
+                form.save()
+                messages.success(request, 'Profile updated successfully')
             else:
-                if Mailing.objects.all().filter(email=profile.email).exists():
-                    Mailing.objects.all().filter(email=profile.email).delete()
-                    messages.info(request, 'Email successfully removed from mailing list')
-            form.save()
-            messages.success(request, 'Profile updated successfully')
+                messages.error(request, "Update failed. Please ensure the form is valid.")
         else:
-            messages.error(request, "Update failed. Please ensure the form is valid.")
-    else:
-        form = ProfileForm(instance=profile)
+            form = ProfileForm(instance=profile)
 
-    template = 'profiles/profile.html'
-    context = {
-        'form': form,
-        'on_profile_page': True,
-    }
+        template = 'profiles/profile.html'
+        context = {
+            'form': form,
+            'on_profile_page': True,
+        }
 
-    return render(request, template, context)
+        return render(request, template, context)
+    except Exception as e:
+        print(e)
+        return server_error(request)
 
 @login_required
 def delete_profile(request):
