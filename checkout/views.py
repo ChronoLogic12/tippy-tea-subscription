@@ -101,50 +101,50 @@ def customer_portal(request):
 @require_POST
 @csrf_exempt
 def webhook_received(request):
-	# Replace this endpoint secret with your endpoint's unique secret
-	# If you are testing with the CLI, find the secret by running 'stripe listen'
-	# If you are using an endpoint defined with the API or dashboard, look in your webhook settings
-	# at https://dashboard.stripe.com/webhooks
-	webhook_secret = settings.STRIPE_WH_SECRET
-	request_data = request.POST
+	try:
+		# Replace this endpoint secret with your endpoint's unique secret
+		# If you are testing with the CLI, find the secret by running 'stripe listen'
+		# If you are using an endpoint defined with the API or dashboard, look in your webhook settings
+		# at https://dashboard.stripe.com/webhooks
+		webhook_secret = settings.STRIPE_WH_SECRET
+		request_data = request.POST
 
-	if webhook_secret:
-		# Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
-		signature = request.headers.get('stripe-signature')
-		try:
+		if webhook_secret:
+			# Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
+			signature = request.headers.get('stripe-signature')
 			event = stripe.Webhook.construct_event(
 			payload=request.data, sig_header=signature, secret=webhook_secret)
 			data = event['data']
-		except Exception as e:
-			return e
-		# Get the type of webhook event sent - used to check the status of PaymentIntents.
-		event_type = event['type']
-	else:
-		data = request_data['data']
-		event_type = request_data['type']
-	data_object = data['object']
+			# Get the type of webhook event sent - used to check the status of PaymentIntents.
+			event_type = event['type']
+		else:
+			data = request_data['data']
+			event_type = request_data['type']
+		data_object = data['object']
 
-	print('event ' + event_type)
-	print(data_object)
-	if event_type == 'checkout.session.completed':
-		messages.success(request, 'Payment succeeded!')
-	elif event_type == 'customer.subscription.trial_will_end':
-		print('Subscription trial will end')
-	elif event_type == 'customer.subscription.created':
-		subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
-		print(subscription)
-		user = User.objects.get(email=subscription.customer.customer_email)
-		order = Order(user=user, product=subscription.plan.product.id)
-		order.save()
-	elif event_type == 'customer.subscription.updated':
-		print('Subscription created %s', event.id)
-	elif event_type == 'customer.subscription.deleted':
-		subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
-		user = User.objects.get(email=subscription.customer.customer_email)
-		order = Order.objects.get(user=user, product=subscription.plan.product.id)
-		order.delete()
+		print('event ' + event_type)
+		print(data_object)
+		if event_type == 'checkout.session.completed':
+			messages.success(request, 'Payment succeeded!')
+		elif event_type == 'customer.subscription.trial_will_end':
+			print('Subscription trial will end')
+		elif event_type == 'customer.subscription.created':
+			subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
+			print(subscription)
+			user = User.objects.get(email=subscription.customer.customer_email)
+			order = Order(user=user, product=subscription.plan.product.id)
+			order.save()
+		elif event_type == 'customer.subscription.updated':
+			print('Subscription created %s', event.id)
+		elif event_type == 'customer.subscription.deleted':
+			subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
+			user = User.objects.get(email=subscription.customer.customer_email)
+			order = Order.objects.get(user=user, product=subscription.plan.product.id)
+			order.delete()
 
-	return JsonResponse({'status': 'success'})
+		return JsonResponse({'status': 'success'})
+	except Exception as e:
+		return JsonResponse(e)
 
 
 @login_required
