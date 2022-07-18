@@ -13,3 +13,8 @@
 		margin-right: 0 !important;
 	}
 }
+
+.edit-blog-button-container {
+	display: flex;
+	justify-content: space-evenly;
+}
