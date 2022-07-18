@@ -106,7 +106,7 @@ def webhook_received(request):
 		# If you are testing with the CLI, find the secret by running 'stripe listen'
 		# If you are using an endpoint defined with the API or dashboard, look in your webhook settings
 		# at https://dashboard.stripe.com/webhooks
-		webhook_secret = settings.STRIPE_WH_SECRET
+		webhook_secret = settings.DJSTRIPE_WEBHOOK_SECRET
 		request_data = request.POST
 
 		if webhook_secret:
