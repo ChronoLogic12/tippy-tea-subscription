@@ -14,7 +14,7 @@ def profile(request):
         profile = get_object_or_404(Profile, user=request.user)
 
         if request.method == 'POST':
-            form = ProfileForm(request.POST, instance=profile)
+            form = ProfileForm(data=request.POST, instance=profile)
             if form.is_valid():
                 if form.cleaned_data['mailing']:
                     if not Mailing.objects.all().filter(email=profile.email).exists():
@@ -47,8 +47,7 @@ def profile(request):
 @login_required
 def delete_profile(request):
     """ Delete User profile """
-    if request.method == 'DELETE':
-        user=request.user
-        user.delete()
-        messages.success(request, 'User profile deleted!')
-        return redirect(reverse('home'))
+    user=request.user
+    user.delete()
+    messages.success(request, 'User profile deleted!')
+    return redirect(reverse('home'))

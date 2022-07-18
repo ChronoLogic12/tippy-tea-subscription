@@ -7,10 +7,10 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields='__all__'
-        exclude = ('user',)
+        exclude = ('user', 'checkout_session_id')
         
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, fields_required=False, *args, **kwargs):
         """
         Add placeholders and classes, remove auto-generated
         labels and set autofocus on first field
@@ -29,6 +29,9 @@ class ProfileForm(forms.ModelForm):
 
         self.fields['full_name'].widget.attrs['autofocus'] = True
         for field in self.fields: 
+            if fields_required:
+                if field not in ['street_address2', 'mailing']:
+                    self.fields[field].required = True
             if field == "country":
                 self.fields["country"].widget.attrs['class'] = 'input-field col s12'
             if field not in ["country", "mailing"]:
