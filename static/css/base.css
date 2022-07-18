@@ -232,9 +232,6 @@ body {
 }
 
 @media only screen and (min-width: 992px) {
-	.hero-container {
-		flex-direction: row !important;
-	}
 	:is(.auth, .blog, .error) .custom-card {
 		padding: 2rem !important;
 	}

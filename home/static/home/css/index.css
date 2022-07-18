@@ -30,7 +30,7 @@
 }
 
 .how-it-works-card i {
-	color: var(--p1) !important;
+	color: var(--p2) !important;
 	cursor: default !important;
 	margin-bottom: auto;
 }
