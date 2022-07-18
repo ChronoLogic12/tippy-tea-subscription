@@ -1,6 +1,10 @@
+from ast import Subscript
 from django.shortcuts import render, get_object_or_404
 
-from .models import Subscription
+from djstripe.models import Plan
+import stripe
+
+from subscriptions.forms import SubscriptionForm
 
 
 def subscriptions(request):
@@ -8,14 +12,20 @@ def subscriptions(request):
 
     if request.method == 'GET':
         template = 'subscriptions/subscriptions.html'
-        classic = get_object_or_404(Subscription, name="classic")
-        large = get_object_or_404(Subscription, name="large")
-        discovery = get_object_or_404(Subscription, name="discovery")
-        
+        plans = Plan.objects.all().order_by("amount")
         context = {
-            'classic': classic,
-            'large': large,
-            'discovery': discovery,
+            'plans': plans,
         }
 
         return render(request, template, context, status=200)
+
+# def edit_subscription(request, subscription_id):
+#     """ Edit subscription details in stripe """
+#     if request.method == 'POST':
+#         form = SubscriptionForm(request.POST, instance=subscription_id)
+#         # if form.is_valid():
+
+
+#     product = Product.objects.all()
+#     template = 'subscriptions/edit_subscription.html'
+#     return render(request, template, context, status=200)

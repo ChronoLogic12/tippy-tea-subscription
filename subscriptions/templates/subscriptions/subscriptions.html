@@ -12,65 +12,32 @@
 {% block content %}
 <section class="main-container z-depth-4">
     <div class="container-fluid hero-container valign-wrapper subscriptions">
+        {% for plan in plans %}
         <div class="col m12 l4 center-align custom-card">
-            <h5 class="capitalise">{{ classic.name }}</h5>
+            <h5 class="capitalise">{{ plan.product.name }}</h5>
             <div class="card-image">
-                {% if classic.image_url %}
-                <img class="responsive-img" src="{{ classic.image_url }}">
+                {% if plan.product.image_url %}
+                <img class="responsive-img" src="{{ plan.image_url }}">
                 {% else %}
                 <img class="responsive-img"
                     src="https://res.cloudinary.com/chronologic12/image/upload/v1655374805/tippy/Tippy_xduny8.svg">
                 {% endif %}
             </div>
-            <p>{{ classic.description }}</p>
+            <p>{{ plan.product.description }}</p>
             <div class="select-container">
-                <a href="#" class="button">Select</a>
+                <form action="{% url 'checkout' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="plan_id" id="plan_id" value="{{plan.id}}">
+                    <button class="button">Select</button>
+                </form>
                 <div>
-                    <div class="left flow-text">{{classic.weight}}</div>
-                    <div class="right flow-text">£{{classic.price}}</div>
+                    <div class="left flow-text">{{plan.metadata.weight}}</div>
+                    <div class="right flow-text">£{{plan.amount}}/mo</div>
                 </div>
             </div>
         </div>
-        <div class="col m12 l4 center-align custom-card">
-            <h5 class="capitalise">{{ large.name }}</h5>
-            <div class="card-image">
-                {% if large.image_url %}
-                <img class="responsive-img" src="{{ large.image_url }}">
-                {% else %}
-                <img class="responsive-img"
-                    src="https://res.cloudinary.com/chronologic12/image/upload/v1655374805/tippy/Tippy_xduny8.svg">
-                {% endif %}
-            </div>
-            <p>{{ large.description }}</p>
-            <div class="select-container">
-                <a href="#" class="button">Select</a>
-                <div>
-                    <div class="left flow-text">{{large.weight}}</div>
-                    <div class="right flow-text">£{{large.price}}</div>
-                </div>
-            </div>
-        </div>
-        <div class="col m12 l4 center-align custom-card">
-            <h5 class="capitalise">{{ discovery.name }}</h5>
-            <div class="card-image">
-                {% if discovery.image_url %}
-                <img class="responsive-img" src="{{ discovery.image_url }}">
-                {% else %}
-                <img class="responsive-img"
-                    src="https://res.cloudinary.com/chronologic12/image/upload/v1655374805/tippy/Tippy_xduny8.svg">
-                {% endif %}
-            </div>
-            <p>{{ discovery.description }}</p>
-            <div class="select-container">
-                <a href="#" class="button">Select</a>
-                <div>
-                    <div class="left flow-text">{{discovery.weight}}</div>
-                    <div class="right flow-text">£{{discovery.price}}</div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
-
 </section>
 
 {% endblock %}
