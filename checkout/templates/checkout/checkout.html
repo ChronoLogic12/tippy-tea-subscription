@@ -15,8 +15,9 @@
 
 <main class="main-container">
     <div class="container hero-container valign-wrapper">
-        <div class="custom-card col s12">
-            <h2 class="capitalise">Delivery information</h2>
+        <div class="custom-card container">
+            <h2 class="capitalise">Checkout</h2>
+            <h4 class="capitalise">Delivery<br>Information</h4>
             <form action="{% url 'create-checkout-session' %}" method="POST" id="profile-update">
                 {% csrf_token %}
                 {{ form.full_name }}
@@ -34,14 +35,17 @@
                         <span>Registered for Mailing list</span>
                     </label>
                 </p>
-                <div class="product">
-                    <div class="description">
-                        <h3>{{plan.product.name}}</h3>
-                        <h5>£{{plan.amount}} / month</h5>
+                <div class="center product">
+                    <h4 class="capitalise">Subscription</h4>
+                    <div class="custom-card">
+                        <div class="description">
+                            <h3>{{plan.product.name}}</h3>
+                            <h5>£{{plan.amount}} / month</h5>
+                        </div>
                     </div>
+                    <input type="hidden" name="lookup_key" value="{{PRICE_LOOKUP_KEY}}" />
+                    <button class="button" id="checkout-and-portal-button" type="submit">Checkout</button>
                 </div>
-                <input type="hidden" name="lookup_key" value="{{PRICE_LOOKUP_KEY}}" />
-                <button class="button" id="checkout-and-portal-button" type="submit">Checkout</button>
             </form>
         </div>
     </div>
