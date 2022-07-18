@@ -207,9 +207,9 @@ if 'USE_AWS' in os.environ:
 
 
 #stripe
-STRIPE_TEST_PUBLIC_KEY = config("STRIPE_PUBLIC_KEY", default="")
-STRIPE_TEST_SECRET_KEY = config("STRIPE_SECRET_KEY", default="")
-DJSTRIPE_WEBHOOK_SECRET = config("STRIPE_WH_SECRET", default="")
+STRIPE_TEST_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY", "")
+STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "")
+DJSTRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WH_SECRET", "")
 DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 
 if not 'USE_AWS' in os.environ:

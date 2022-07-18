@@ -110,6 +110,12 @@ def webhook_received(request):
 		webhook_secret = settings.DJSTRIPE_WEBHOOK_SECRET
 		request_data = request.POST
 		logger = logging.getLogger('testlogger')
+		logger.info("""***
+		
+		
+		
+		
+		****""")
 		if webhook_secret:
 			# Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
 			signature = request.headers.get('stripe-signature')
