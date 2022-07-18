@@ -15,7 +15,7 @@ from profiles.forms import ProfileForm
 from profiles.models import Profile
 from mailing.models import Mailing
 from checkout.models import Order
-from django.contrib.auth import User
+from django.contrib.auth.models import User
 from stripe import Subscription
 
 from djstripe.models import Plan
