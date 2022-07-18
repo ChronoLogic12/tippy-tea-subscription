@@ -24,6 +24,12 @@
 	margin: 1rem;
 }
 
+.price {
+	font-weight: bold !important;
+	color: white !important;
+	font-size: 3.5rem;
+}
+
 .button {
 	padding: 0.5rem 1rem;
 }
@@ -43,5 +49,11 @@
 
 	.subscriptions .custom-card {
 		height: 100%;
+	}
+}
+
+@media only screen and (max-width: 992px) {
+	.price {
+		font-size: 2rem;
 	}
 }

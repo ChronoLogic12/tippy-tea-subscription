@@ -24,16 +24,15 @@
                 {% endif %}
             </div>
             <p>{{ plan.product.description }}</p>
+            <div class="price">
+                <div>£{{plan.amount}}/mo</div>
+            </div>
             <div class="select-container">
                 <form action="{% url 'checkout' %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="plan_id" id="plan_id" value="{{plan.id}}">
                     <button class="button">Select</button>
                 </form>
-                <div>
-                    <div class="left flow-text">{{plan.metadata.weight}}</div>
-                    <div class="right flow-text">£{{plan.amount}}/mo</div>
-                </div>
             </div>
         </div>
         {% endfor %}
