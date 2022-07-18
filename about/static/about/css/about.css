@@ -6,6 +6,10 @@
 	align-items: center;
 }
 
+.about-row .custom-card {
+	margin: auto;
+}
+
 .about::before {
 	content: "";
 	position: absolute;
@@ -27,20 +31,21 @@
 	align-items: center;
 	position: relative;
 	height: 100% !important;
+	padding-bottom: 2rem;
 }
 
-@media only screen and (max-width: 600px) {
-	.about-row {
+@media only screen and (max-width: 992px) {
+	.about-row .custom-card {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		width: 100% !important;
 	}
-	.about-row:first-child div:nth-child(1) {
+	.part-one div:nth-child(1) {
 		order: 2;
 	}
-	.about-row:first-child div:nth-child(2) {
+	.part-two div:nth-child(2) {
 		order: 1;
 	}
 }
