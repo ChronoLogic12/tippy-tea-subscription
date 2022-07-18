@@ -121,7 +121,11 @@ def webhook_received(request):
 			signature = request.META['HTTP_STRIPE_SIGNATURE']
 			event = stripe.Webhook.construct_event(
 			payload=request.body, sig_header=signature, secret=webhook_secret)
-			logger.info(event)
+			logger.info("""
+			
+			event created
+			
+			""")
 			data = event['data']
 			# Get the type of webhook event sent - used to check the status of PaymentIntents.
 			event_type = event['type']
@@ -133,11 +137,23 @@ def webhook_received(request):
 
 		if event_type == 'customer.subscription.created':
 			subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
-			logger.info(subscription)
+			logger.info("""
+			
+			subscription created
+			
+			""")
 			user = User.objects.get_object_or_404(email=subscription.customer.email)
-			logger.info(user)
+			logger.info("""
+			
+			user found
+			
+			""")
 			order = Order(user=user, product=subscription.plan.product.id)
-			logger.info(order)
+			logger.info("""
+			
+			order created
+			
+			""")
 			order.save()
 		elif event_type == 'customer.subscription.deleted':
 			subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
