@@ -1,0 +1,31 @@
+/*This code is heavily adapted from the stripe billing quickstart code found here
+(https://stripe.com/docs/billing/quickstart) */
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
+{% block extra_title %}
+- Checkout
+{% endblock %}
+
+{% block content %}
+
+<body>
+    <section>
+        <p>Picked the wrong subscription? Shop around then come back to pay!</p>
+    </section>
+</body>
+
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript" src="{% static 'checkout/js/checkout.js' %}">
+</script>
+{% endblock %}
