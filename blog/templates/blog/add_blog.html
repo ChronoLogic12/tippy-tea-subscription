@@ -18,9 +18,9 @@
             <form class="flow-text" method="POST" action="{% url 'add_blog' %}">
                 {% csrf_token %}
                 {{ form }}
-                <div class="auth-button-container">
-                    <a class="button-secondary hoverable secondaryAction" href="{% url 'blog' %}">Cancel</a> <button
-                        class="primaryAction hoverable button" type="submit">Add</button>
+                <div class="blog-button-container">
+                    <a class="button-secondary hoverable secondaryAction" href="{% url 'blog' %}">Cancel</a>
+                    <button class="primaryAction hoverable button" type="submit">Add</button>
                 </div>
             </form>
         </div>

@@ -18,9 +18,9 @@
             <form class="flow-text" method="POST" action="{% url 'edit_blog' blog.id %}">
                 {% csrf_token %}
                 {{ form }}
-                <div class="edit-blog-button-container">
-                    <a class="button-secondary hoverable secondaryAction" href="{% url 'blog' %}">Cancel</a> <button
-                        class="primaryAction hoverable button" type="submit">Confirm</button>
+                <div class="blog-button-container">
+                    <a class="button-secondary hoverable secondaryAction" href="{% url 'blog' %}">Cancel</a>
+                    <button class="primaryAction hoverable button" type="submit">Confirm</button>
                 </div>
             </form>
         </div>
