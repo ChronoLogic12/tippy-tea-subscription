@@ -134,8 +134,18 @@ def webhook_received(request):
 			data = request_data['data']
 			event_type = request_data['type']
 		data_object = data['object']
-
+		logger.info("""
+			
+			event type:
+			
+			""")
+		logger.info(event_type)
 		if event_type == 'customer.subscription.created':
+			logger.info("""
+			
+			event subscription created
+			
+			""")
 			subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
 			logger.info("""
 			
