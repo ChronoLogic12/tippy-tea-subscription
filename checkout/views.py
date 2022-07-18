@@ -117,11 +117,10 @@ def webhook_received(request):
 		
 		****""")
 		if webhook_secret:
-			logger.info("webhook secret true")
 			# Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
 			signature = request.META['HTTP_STRIPE_SIGNATURE']
 			event = stripe.Webhook.construct_event(
-			payload=request.data, sig_header=signature, secret=webhook_secret)
+			payload=request.body, sig_header=signature, secret=webhook_secret)
 			logger.info(event)
 			data = event['data']
 			# Get the type of webhook event sent - used to check the status of PaymentIntents.
