@@ -25,4 +25,6 @@ urlpatterns = [
     path('profile/', include('profiles.urls')),
     path('mailing/', include('mailing.urls')),
     path('subscriptions/', include('subscriptions.urls')),
+    path('checkout/', include('checkout.urls')),
+    path("stripe/", include("djstripe.urls", namespace="djstripe")),
 ]
