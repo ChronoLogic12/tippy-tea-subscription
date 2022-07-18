@@ -21,6 +21,7 @@ from stripe import Subscription
 from djstripe.models import Plan
 
 import stripe
+import logging
 from django.conf import settings
 
 
@@ -99,7 +100,6 @@ def customer_portal(request):
     return redirect(portalSession.url, code=303)
 
 @require_POST
-@csrf_exempt
 def webhook_received(request):
 	try:
 		# Replace this endpoint secret with your endpoint's unique secret
@@ -108,12 +108,13 @@ def webhook_received(request):
 		# at https://dashboard.stripe.com/webhooks
 		webhook_secret = settings.DJSTRIPE_WEBHOOK_SECRET
 		request_data = request.POST
-
+		logger = logging.getLogger('testlogger')
 		if webhook_secret:
 			# Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
 			signature = request.headers.get('stripe-signature')
 			event = stripe.Webhook.construct_event(
 			payload=request.data, sig_header=signature, secret=webhook_secret)
+			logger.info(event)
 			data = event['data']
 			# Get the type of webhook event sent - used to check the status of PaymentIntents.
 			event_type = event['type']
@@ -124,8 +125,11 @@ def webhook_received(request):
 
 		if event_type == 'customer.subscription.created':
 			subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
+			logger.info(subscription)
 			user = User.objects.get_object_or_404(email=subscription.customer.email)
+			logger.info(user)
 			order = Order(user=user, product=subscription.plan.product.id)
+			logger.info(order)
 			order.save()
 		elif event_type == 'customer.subscription.deleted':
 			subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
