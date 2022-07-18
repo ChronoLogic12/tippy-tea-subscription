@@ -122,29 +122,20 @@ def webhook_received(request):
 			event_type = request_data['type']
 		data_object = data['object']
 
-		print('event ' + event_type)
-		print(data_object)
-		if event_type == 'checkout.session.completed':
-			messages.success(request, 'Payment succeeded!')
-		elif event_type == 'customer.subscription.trial_will_end':
-			print('Subscription trial will end')
-		elif event_type == 'customer.subscription.created':
+		if event_type == 'customer.subscription.created':
 			subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
-			print(subscription)
-			user = User.objects.get(email=subscription.customer.customer_email)
+			user = User.objects.get_object_or_404(email=subscription.customer.email)
 			order = Order(user=user, product=subscription.plan.product.id)
 			order.save()
-		elif event_type == 'customer.subscription.updated':
-			print('Subscription created %s', event.id)
 		elif event_type == 'customer.subscription.deleted':
 			subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
-			user = User.objects.get(email=subscription.customer.customer_email)
-			order = Order.objects.get(user=user, product=subscription.plan.product.id)
+			user = User.objects.get_object_or_404(email=subscription.customer.email)
+			order = Order.objects.get_object_or_404(user=user, product=subscription.plan.product.id)
 			order.delete()
 
 		return JsonResponse({'status': 'success'})
 	except Exception as e:
-		return JsonResponse(e)
+		return JsonResponse({'error': e})
 
 
 @login_required
@@ -170,3 +161,4 @@ def success(request):
 
 def cancel(request):
   return render(request, 'checkout/cancel.html',)
+
