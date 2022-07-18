@@ -100,6 +100,7 @@ def customer_portal(request):
     return redirect(portalSession.url, code=303)
 
 @require_POST
+@csrf_exempt
 def webhook_received(request):
 	try:
 		# Replace this endpoint secret with your endpoint's unique secret
