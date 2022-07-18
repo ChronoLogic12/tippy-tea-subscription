@@ -1,6 +1,7 @@
 # This code is heavily adapted from the stripe billing quickstart code found here (https://stripe.com/docs/billing/quickstart)
 
 from dataclasses import field
+from itertools import product
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -13,6 +14,9 @@ from django.http import JsonResponse
 from profiles.forms import ProfileForm
 from profiles.models import Profile
 from mailing.models import Mailing
+from checkout.models import Order
+from django.contrib.auth import User
+from stripe import Subscription
 
 from djstripe.models import Plan
 
@@ -95,60 +99,74 @@ def customer_portal(request):
     return redirect(portalSession.url, code=303)
 
 @require_POST
+@csrf_exempt
 def webhook_received(request):
-    # Replace this endpoint secret with your endpoint's unique secret
-    # If you are testing with the CLI, find the secret by running 'stripe listen'
-    # If you are using an endpoint defined with the API or dashboard, look in your webhook settings
-    # at https://dashboard.stripe.com/webhooks
-    webhook_secret = settings.STRIPE_WH_SECRET
-    request_data = request.POST
+	# Replace this endpoint secret with your endpoint's unique secret
+	# If you are testing with the CLI, find the secret by running 'stripe listen'
+	# If you are using an endpoint defined with the API or dashboard, look in your webhook settings
+	# at https://dashboard.stripe.com/webhooks
+	webhook_secret = settings.STRIPE_WH_SECRET
+	request_data = request.POST
 
-    if webhook_secret:
-        # Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
-        signature = request.headers.get('stripe-signature')
-        try:
-            event = stripe.Webhook.construct_event(
-                payload=request.data, sig_header=signature, secret=webhook_secret)
-            data = event['data']
-        except Exception as e:
-            return e
-        # Get the type of webhook event sent - used to check the status of PaymentIntents.
-        event_type = event['type']
-    else:
-        data = request_data['data']
-        event_type = request_data['type']
-    data_object = data['object']
+	if webhook_secret:
+		# Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
+		signature = request.headers.get('stripe-signature')
+		try:
+			event = stripe.Webhook.construct_event(
+			payload=request.data, sig_header=signature, secret=webhook_secret)
+			data = event['data']
+		except Exception as e:
+			return e
+		# Get the type of webhook event sent - used to check the status of PaymentIntents.
+		event_type = event['type']
+	else:
+		data = request_data['data']
+		event_type = request_data['type']
+	data_object = data['object']
 
-    print('event ' + event_type)
+	print('event ' + event_type)
+	print(data_object)
+	if event_type == 'checkout.session.completed':
+		messages.success(request, 'Payment succeeded!')
+	elif event_type == 'customer.subscription.trial_will_end':
+		print('Subscription trial will end')
+	elif event_type == 'customer.subscription.created':
+		subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
+		print(subscription)
+		user = User.objects.get(email=subscription.customer.customer_email)
+		order = Order(user=user, product=subscription.plan.product.id)
+		order.save()
+	elif event_type == 'customer.subscription.updated':
+		print('Subscription created %s', event.id)
+	elif event_type == 'customer.subscription.deleted':
+		subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
+		user = User.objects.get(email=subscription.customer.customer_email)
+		order = Order.objects.get(user=user, product=subscription.plan.product.id)
+		order.delete()
 
-    if event_type == 'checkout.session.completed':
-        messages.success(request, 'Payment succeeded!')
-    elif event_type == 'customer.subscription.trial_will_end':
-        print('Subscription trial will end')
-    elif event_type == 'customer.subscription.created':
-        print('Subscription created %s', event.id)
-    elif event_type == 'customer.subscription.updated':
-        print('Subscription created %s', event.id)
-    elif event_type == 'customer.subscription.deleted':
-        # handle subscription canceled automatically based
-        # upon your subscription settings. Or if the user cancels it.
-        print('Subscription canceled: %s', event.id)
-
-    return JsonResponse({'status': 'success'})
+	return JsonResponse({'status': 'success'})
 
 
 @login_required
 def success(request):
-    session_id = request.GET.get('session_id', '')
-    if session_id == '':
-        return redirect(reverse('home'))
-    profile = get_object_or_404(Profile, user=request.user)
-    if not profile.customer_id:
-        session = stripe.checkout.Session.retrieve(session_id)
-        customer = session.customer
-        profile.customer_id = customer
-        profile.save()
-    return render(request, 'checkout/success.html')
+    try:
+        session_id = request.GET.get('session_id', '')
+        if session_id == '':
+            return redirect(reverse('home'))
+        profile = get_object_or_404(Profile, user=request.user)
+        session = stripe.checkout.Session.retrieve(id=session_id, expand=['subscription.plan.product'])
+        if not profile.customer_id:
+            customer = session.customer
+            profile.customer_id = customer
+            profile.save()
+        product = session.subscription.plan.product 
+        template = 'checkout/success.html'
+        context = {
+          'product': product,
+        }
+        return render(request, template, context)
+    except Exception as e:
+      	return server_error(request)
 
 def cancel(request):
-  return render(request, 'checkout/cancel.html')
+  return render(request, 'checkout/cancel.html',)
