@@ -45,6 +45,13 @@ Tippy is a specialist subscription service bringing the greatest tastes from the
       - [Sign Out](#sign-out)
       - [Register](#register)
     - [Error Pages](#error-pages)
+  - [Testing](#testing)
+  - [Deployment](#deployment)
+    - [Deploying to Heroku](#deploying-to-heroku)
+    - [Configuring Stripe](#configuring-stripe)
+    - [Configuring Gmail](#configuring-gmail)
+    - [Configuring AWS S3](#configuring-aws-s3)
+    - [Cloning and running locally](#cloning-and-running-locally)
   - [Credits](#credits)
     - [Services](#services)
     - [Content](#content)
@@ -216,10 +223,10 @@ The edit blogs page uses the same form as the add blogs page but is pre filled w
 
 ### Profile
 
-The profile page contains a form detailing a users stored info including a checkbox details the users current subscription to mailing list status. If the user has saved data previously these will be pre filled, if they are already signed up for the mailing list the checkbox will be checked.
+The profile page contains a form detailing a users stored info including a checkbox details the users current subscription to mailing list status. If the user has saved data previously these will be pre filled, if they are already signed up for the mailing list the checkbox will be checked. The profile page also contains controls to manage subscriptions by opening the stripe customer portal and controls to delete suer account. When logged in as an admin there will also be an additional control to navigate to the send newsletter page.
 
 <p align="center">
-    <img src="readme-assets\######.PNG" width="300px"/>
+    <img src="readme-assets\profile.PNG" width="300px"/>
 </p>
 
 ### Mailing
@@ -278,6 +285,110 @@ Custom error pages for 404 and 500 errors contain a simple box showing the error
     <img src="readme-assets\error404.PNG" width="300px"/>
 </p>
 
+## Testing
+
+For full testing documentation please see [TESTING.md](TESTING.md)
+
+## Deployment
+
+### Deploying to Heroku
+
+To deploy this application to heroku first we must make sure to establish a requirements.txt and Procfile as heroku needs these to operate. First type:
+
+```sh
+pip3 freeze --local > requirements.txt
+```
+
+into the terminal to establish your requirements.txt file. Then enter:
+
+```sh
+echo web: gunicorn tippy.wsgi:application > Procfile
+```
+
+to insert the startup commands for heroku into a Procfile.
+
+- Next, go to [Heroku](https://www.heroku.com/) and login/register
+- Navigate to your dashboard and select 'New' - 'Create new app'
+- Enter a unique application name and select your region then click 'Create app'
+- Navigate to the new apps overview page, under installed add-ons click 'configure Add-ons'. Search for 'Heroku Postgres' and select to add it to add-ons.
+- To connect your app and set up automatic deployment, select 'GitHub' under the 'Deployment method' section.
+- Select your GitHub profile and the name of the repository containing your code.
+- Add your config variables to Heroku by navigating to settings, scrolling down and clicking 'Reveal Config Vars'. Then input the key value pairs from your `.env` file
+- Return to the deploy tab and select 'Enable Automatic deployment'
+- Once the app is deployed you can open the live site by selecting the 'Open app' button at the top right of the page.
+
+### Configuring Stripe
+
+### Configuring Gmail
+
+- Log in to gmail.
+- Navigate to settings, then select accounts and Import > other google account settings > Security > Signing into google.
+- Click to turn on 2 step verification and follow instructions to verify.
+- Return to the security page and select the new option 'App passwords' under signing into google.
+- For app select 'Mail' and under select device select other and type 'django'.
+- Copy the generated app password and save it as a config variable in heroku along with the gmail email account.
+  ```
+  EMAIL_HOST_PASS: generatedAppPassword
+  EMAIL_HOST_USER: example@gmail.com
+  ```
+
+### Configuring AWS S3
+
+- Log in to AWS.
+- Search for s3 and select it
+- On the buckets page select create bucket, add bucket name and select local region. Under object ownership click ACLs enabled and bucket owner preferred. Uncheck 'Block all public access' and create bucket.
+- Navigate to the new buckets properties tab
+
+### Cloning and running locally
+
+- To clone the repository for this project first navigate to the [Repository main page](https://github.com/ChronoLogic12/tippy-tea-subscription) and click on the **code** button.
+
+<p align="center">
+    <img src="readme-assets\clone-code.PNG" width="500px"/>
+</p>
+
+- To clone the repository using HTTPS, select the HTTPS tab under the clone section and click the icon to copy the provided url to the clipboard.
+
+<p align="center">
+    <img src="readme-assets\clone-https.PNG" width="200px"/>
+</p>
+
+- Open Git Bash and navigate to the location you would like to store the cloned repository.
+- Type `git clone` followed by the url you copied earlier.
+
+```sh
+$ git clone https://github.com/ChronoLogic12/bookmarks.git
+```
+
+- Press enter to create your cloned repository.
+- In bash navigate to the root directory of the downloaded project and run the following command to create a shell and install dependencies.
+
+```sh
+pipenv shell
+pipenv install
+```
+
+- At the project root directory create a file called `.env`.
+- in `.env` add the following environment variable data and replace empty strings with your stripe key data.
+
+```py
+SECRET_KEY = ''
+STRIPE_PUBLIC_KEY = ''
+STRIPE_SECRET_KEY = ''
+STRIPE_WH_SECRET = ''
+DEVELOPMENT = 'True'
+```
+
+- To run a local development server from Bash:
+
+```sh
+python3 manage.py runserver
+```
+
+run on http://localhost:8000/
+
+For more details on cloning repositories click [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+
 ## Credits
 
 ### Services
@@ -286,6 +397,8 @@ Custom error pages for 404 and 500 errors contain a simple box showing the error
 - [Google fonts](https://fonts.google.com/).
 - [Font Awesome](https://fontawesome.com/) - general additional icons.
 - [Django](https://www.djangoproject.com/) python framework.
+- [Stripe documentation](https://stripe.com/docs/billing/quickstart) - checkout app was adapted from code found in the stripe docs billing quick start guid.
+- [djstripe](https://dj-stripe.dev/) linking between django and stripe.
 - [Heroku](https://www.heroku.com/) application host.
 - [Amazon S3](https://aws.amazon.com) - cloud storage.
 - [Gunicorn](https://gunicorn.org/) - wsgi server.
