@@ -6,6 +6,10 @@
 
 [Tippy - live site](https://tippy-tea-subscription.herokuapp.com/)
 
+<p align="center">
+    <img src="readme-assets\tippy-responsive.PNG" width="1200px"/>
+</p>
+
 _*This site is for training purposes only, the company is fictional and no orders will be charged or receive products.* _
 
 ## **About Tippy**
@@ -61,7 +65,6 @@ The goal of this project is to produce an e-commerce website selling monthly spe
 #### As an admin user -
 
 - Log in to an admin account.
-- Update product info and pricing.
 - Send emails to users signed up the the mailing list.
 - Add posts to the sites info blog.
 
@@ -84,6 +87,20 @@ As tippy is targeted as a specialist and high end service I wanted the site to r
 </p>
 
 ## Database schema
+
+Database model created using [dbdiagram.io](https://dbdiagram.io)
+
+<p align="center">
+    <img src="readme-assets/database-schema.PNG" width="500px"/>
+</p>
+
+The site uses five models as show above:
+
+- user (profile) extends the django user model and stores all required user data.
+- subscriptions: represents the plans a user can subscribe to and is extracted from products on stripe using djstripe.
+- orders: links user by id to the product they have ordered.
+- mailing: holds the email addresses of all people signed up to the mailing list.
+- blogs: are created by admin users and display to the user on the blogs page.
 
 ## Credits
 
@@ -113,10 +130,13 @@ As tippy is targeted as a specialist and high end service I wanted the site to r
 
 - Code Institute learning material - general knowledge.
 - Code Institute - 'boutique ado' learning project - specific django knowledge.
+- [Stripe documentation](https://stripe.com/docs/billing/quickstart) - checkout app was adapted from code found in the stripe docs billing quick start guid.
+- [djstripe](https://dj-stripe.dev/) linking between django and stripe.
 - [Codecademy](https://www.codecademy.com/learn) - general knowledge.
 - [w3schools](https://www.w3schools.com/) - general knowledge.
 - [MND Web Docs](https://developer.mozilla.org/en-US/) - general knowledge.
 - [Stack Overflow](https://stackoverflow.com/) - debugging.
 - [Django documentation](https://docs.djangoproject.com/en/4.0/)
+- [dbdiagram.io](https://dbdiagram.io) used to create database diagram.
 - [Youtube tutorial](https://www.youtube.com/watch?v=GBgRMdjAx_c) from [Very Academy](https://www.youtube.com/c/veryacademy) on youtube on testing in django.
 - [Github Gist - tommorris](https://gist.github.com/tommorris/cd1048418cccfa346fef) - Create and login as super user in tests.
