@@ -9,7 +9,7 @@
 {% block content %}
 <main class="main-container">
     <div class="container profile row hero-container valign-wrapper">
-        <div class="custom-card col s12 l6">
+        <div class="custom-card col s12">
             <h2 class="capitalise">Profile</h2>
             <form action="{% url 'profile' %}" method="POST" id="profile-update">
                 {% csrf_token %}
@@ -30,19 +30,20 @@
                 </p>
                 <button class="button">Update information</button>
             </form>
-        </div>
-        <div class="custom-card col s12 l6">
-            <div class="row card-action center-align">
-                {% if user.is_superuser %}
-                <div class="center col s12">
-                    <a class="button" href="{% url 'send_newsletter' %}">Send newsletter</a>
-                </div>
-                {% endif %}
+            <div class="divider"></div>
+            <h4 class="center capitalise">Manage account</h4>
+            {% if user.is_superuser %}
+            <div class="center manage col s12">
+                <a class="button" href="{% url 'send_newsletter' %}">Send newsletter</a>
+            </div>
+            {% endif %}
+            <div class="center col s12">
                 <form action="{% url 'customer-portal' %}" method="POST">
-                    <button class="button">Update</button>
+                    <button class="button manage">Manage subscriptions</button>
                 </form>
                 <a class="red-text dropdown-trigger capitalise" href="#"
-                    data-target="delete-confirmation{{user_id}}">Delete account</a>
+                    data-target="delete-confirmation{{user_id}}">Delete
+                    account</a>
                 <ul id="delete-confirmation{{user_id}}" class='dropdown-content'>
                     <li><a class="red-text" href="{% url 'delete_profile' %}">Confirm</a></li>
                     <li><a class="grey-text" href="#!">Cancel</a></li>

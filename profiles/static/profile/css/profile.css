@@ -2,6 +2,10 @@ profile .custom-card {
 	width: 100% !important;
 }
 
+.manage {
+	margin: 1rem 0;
+}
+
 @media only screen and (min-width: 992px) {
 	.hero-container {
 		flex-direction: row !important;
