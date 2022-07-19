@@ -30,7 +30,7 @@ SECRET_KEY = config("SECRET_KEY", default="")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not 'USE_AWS' in os.environ
 
-ALLOWED_HOSTS = ['tippy-tea-subscription.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['tippy-tea-subscription.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -126,7 +126,7 @@ WSGI_APPLICATION = 'tippy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-if not os.environ.get('DATABASE_URL',  default="") == "":
+if 'DATABASE_URL' in os.environ:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
@@ -134,14 +134,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-
-
-# DATABASES = {
-#     'default': dj_database_url.parse('postgres://cmkyeegtwmdpfk:c31dc93f3b733fbed82ff4a64b83c0f75f8fdf8afd95a61dbb51077f36b280fe@ec2-63-34-180-86.eu-west-1.compute.amazonaws.com:5432/daqm1b7grs2qn8')
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

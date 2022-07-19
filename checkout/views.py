@@ -123,7 +123,7 @@ def webhook_received(request):
 			order = Order(user=user, product=product)
 			order.save()
 			send_mail('Tippy - Order confirmation', 
-			f'Your order of {product.name} has been placed. Order number: {order.order_number}',
+			f'You have successfully subscribed to the {product.name} plan with Tippy! Your order number is: {order.order_number}',
 			settings.EMAIL_HOST_USER,
 			[customer.email],
 			fail_silently=False,
