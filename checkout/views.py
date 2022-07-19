@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.defaults import page_not_found, server_error
 from django.http import JsonResponse
 from django.core.mail import send_mail
+from django.core.exceptions import ObjectDoesNotExist
 
 from profiles.forms import ProfileForm
 from profiles.models import Profile
@@ -32,20 +33,21 @@ stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 @login_required
 @require_POST
 def checkout(request):
-    try:
-      plan = Plan.objects.get(id=request.POST['plan_id'])
-    except Exception as e:
-      return page_not_found(request, exception=e)
-    template = 'checkout/checkout.html'
-    profile = get_object_or_404(Profile, user=request.user)
-    form = ProfileForm(instance=profile, fields_required=True)
-    context = {
-        'form': form,
-        'plan': plan,
-        'PRICE_LOOKUP_KEY': request.POST['plan_id'],
-    }
-
-    return render(request, template, context)
+	try:
+		plan = Plan.objects.get(id=request.POST['plan_id'])
+		template = 'checkout/checkout.html'
+		profile = get_object_or_404(Profile, user=request.user)
+		form = ProfileForm(instance=profile, fields_required=True)
+		context = {
+			'form': form,
+			'plan': plan,
+			'PRICE_LOOKUP_KEY': request.POST['plan_id'],
+		}
+		return render(request, template, context)
+	except ObjectDoesNotExist as e:
+		return page_not_found(request, exception=e)
+	except Exception:
+		return server_error(request)
 
 
 @require_POST
@@ -81,23 +83,25 @@ def create_checkout_session(request):
             cancel_url= f'http{"s" if "tippy" in request.get_host() else ""}://{request.get_host()}/checkout/cancel/'
         )
         return redirect(checkout_session.url)
-    except Exception as e:
-        print(e)
+    except Exception:
         return server_error(request)
 
 @login_required
 @require_POST
 @csrf_exempt
 def customer_portal(request):
-    profile = get_object_or_404(Profile, user=request.user)
-    if not profile.customer_id:
-        messages.error(request, 'Error creating portal, no active subscriptions.')
-        
-    portalSession = stripe.billing_portal.Session.create(
-        customer = profile.customer_id,
-        return_url = f'http{"s" if "tippy" in request.get_host() else ""}://{request.get_host()}/profile/'
-    )
-    return redirect(portalSession.url, code=303)
+	try:
+		profile = get_object_or_404(Profile, user=request.user)
+		if not profile.customer_id:
+			messages.error(request, 'Error creating portal, no active subscriptions.')
+			
+		portalSession = stripe.billing_portal.Session.create(
+			customer = profile.customer_id,
+			return_url = f'http{"s" if "tippy" in request.get_host() else ""}://{request.get_host()}/profile/'
+		)
+		return redirect(portalSession.url, code=303)
+	except Exception:
+		return server_error(request)
 
 @require_POST
 @csrf_exempt
@@ -158,10 +162,12 @@ def success(request):
 		'product': product,
 		}
 		return render(request, template, context)
-	except Exception as e:
-		print(e)
+	except Exception:
 		return server_error(request)
 
 def cancel(request):
-  return render(request, 'checkout/cancel.html',)
+	try:
+		return render(request, 'checkout/cancel.html',)
+	except Exception:
+		return server_error(request)
 

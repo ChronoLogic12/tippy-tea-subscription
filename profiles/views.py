@@ -40,14 +40,16 @@ def profile(request):
         }
 
         return render(request, template, context)
-    except Exception as e:
-        print(e)
+    except Exception:
         return server_error(request)
 
 @login_required
 def delete_profile(request):
     """ Delete User profile """
-    user=request.user
-    user.delete()
-    messages.success(request, 'User profile deleted!')
-    return redirect(reverse('home'))
+    try:
+        user=request.user
+        user.delete()
+        messages.success(request, 'User profile deleted!')
+        return redirect(reverse('home'))
+    except Exception:
+        return server_error(request)
