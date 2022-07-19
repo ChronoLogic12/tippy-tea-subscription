@@ -30,6 +30,21 @@ Tippy is a specialist subscription service bringing the greatest tastes from the
     - [Wireframes](#wireframes)
     - [Design](#design)
   - [Database schema](#database-schema)
+  - [Features](#features)
+    - [Navigation](#navigation)
+    - [Footer](#footer)
+    - [Messages - toasts](#messages---toasts)
+    - [Home](#home)
+    - [Subscriptions](#subscriptions)
+    - [About Us](#about-us)
+    - [Blog](#blog)
+    - [Profile](#profile)
+    - [Mailing](#mailing)
+    - [Auth](#auth)
+      - [Log In](#log-in)
+      - [Sign Out](#sign-out)
+      - [Register](#register)
+    - [Error Pages](#error-pages)
   - [Credits](#credits)
     - [Services](#services)
     - [Content](#content)
@@ -86,6 +101,8 @@ As tippy is targeted as a specialist and high end service I wanted the site to r
     <img src="readme-assets/tippy-colour-palette.PNG" width="600px"/>
 </p>
 
+The site uses django-allauth pages for user management. All pages have been styled to match the rest of the website.
+
 ## Database schema
 
 Database model created using [dbdiagram.io](https://dbdiagram.io)
@@ -101,6 +118,165 @@ The site uses five models as show above:
 - orders: links user by id to the product they have ordered.
 - mailing: holds the email addresses of all people signed up to the mailing list.
 - blogs: are created by admin users and display to the user on the blogs page.
+
+## Features
+
+### Navigation
+
+The sites navigation section is located at the top of all pages. This section contains page navigation controls and is adaptive to screen size and where the current user is logged in. The navigation elements will also highlight depending on the current page.
+
+<p align="center">
+    <img src="readme-assets\navbar-desktop.PNG" width="1200px"/>
+</p>
+<p align="center">
+    <img src="readme-assets\navbar-desktop-logged-out.PNG" width="1200px"/>
+</p>
+For smaller screen sizes the navbar is collapsible and is accessed byt a burger icon in the top left of the screen.
+<p align="center">
+    <img src="readme-assets\navbar-mobile.PNG" width="1200px"/>
+</p>
+<p align="center">
+    <img src="readme-assets\navbar-sidenav.PNG" width="100px"/>
+</p>
+
+1. When logged in the page links are as follows: Subscriptions - About Us - Blog - Profile - Log Out.
+2. When logged out the page links are as follows: Subscriptions - About Us - Blog - Register - Log In.
+
+### Footer
+
+The footer is located at the bottom of all pages and contains links to social media pages, sign up page for newsletter/mailing list and a message informing the user that this site is fictional.
+
+<p align="center">
+    <img src="readme-assets\footer.PNG" width="1200px"/>
+</p>
+
+### Messages - toasts
+
+This site uses djangos messages framework to provide users with helpful feedback at multiple points through their journey in the form of toasts.
+
+<p align="center">
+    <img src="readme-assets\messages-toast.PNG" width="150px"/>
+</p>
+
+### Home
+
+The homepage consists of two main sections; the first contains a small description of what tippy is and it's service, it also contains a prominent call to action button which will take the user to the subscriptions page. at the bottom of this section is a chevron button which when clicked scrolls the page to the next section.
+
+<p align="center">
+    <img src="readme-assets\home-main.PNG" width="1200px"/>
+</p>
+
+The 'How It Works' section contains three cards detailing the journey a customer will go through in order to start a subscription as well as some more details about the service.
+
+<p align="center">
+    <img src="readme-assets\how-it-works.PNG" width="1200px"/>
+</p>
+
+### Subscriptions
+
+The subscription page contains cards for each plan that can be subscribed to detailing: name, image, description and price for each as well as a button which will take the user to the checkout page to complete the purchase of that subscription.
+
+<p align="center">
+    <img src="readme-assets\subscriptions.PNG" width="1200px"/>
+</p>
+
+### About Us
+
+The about us page is for users who want to learn a little more about the company. It contains two cards each containing details on the companies ideal and philosophies as well as the work they are doing.
+
+<p align="center">
+    <img src="readme-assets\about-us.PNG" width="1200px"/>
+</p>
+
+### Blog
+
+The blog page contains blog post updates created by admins. each post contains a title, image, body text and the author.
+
+<p align="center">
+    <img src="readme-assets\blog.PNG" width="200px"/>
+</p>
+
+When logged in as an admin this page has additional features. There is a button at the top of the page which will take the user to a form to create a new post, as well as edit and delete controls for each existing blog. The delete button will bring up a box to confirm/cancel the deletion. Selecting confirm will remove the blog post from the database.
+
+<p align="center">
+    <img src="readme-assets\blog-admin-controls.PNG" width="200px"/>
+</p>
+
+The add new blog page contains a form with fields for all required blog information. Selecting add will add this information to the database, cancel will return the user to the blogs page.
+
+<p align="center">
+    <img src="readme-assets\blog-add.PNG" width="300px"/>
+</p>
+
+The edit blogs page uses the same form as the add blogs page but is pre filled will the info from the blog that was selected to edit. Selecting confirm will update that blogs info in the database, the cancel button will return you to the blogs page.
+
+<p align="center">
+    <img src="readme-assets\blog-edit.PNG" width="300px"/>
+</p>
+
+### Profile
+
+The profile page contains a form detailing a users stored info including a checkbox details the users current subscription to mailing list status. If the user has saved data previously these will be pre filled, if they are already signed up for the mailing list the checkbox will be checked.
+
+<p align="center">
+    <img src="readme-assets\######.PNG" width="300px"/>
+</p>
+
+### Mailing
+
+The subscribe to mailing page contains a form with a single field for the users email. If the user is logged in and already has an email address associated with their profile this field will be pre filled. Filling in the field and selecting register will add that address to the mailing list. If the entered email address is already part of the mailing list the user wil receive a toast message to inform them of this and no action will be taken.
+
+<p align="center">
+    <img src="readme-assets\newsletter.PNG" width="300px"/>
+</p>
+
+The unsubscribe from mailing list page uses the same form from the subscribe page and is also pre filled if the user is logged in and has a registered email address. Filling in the field and selecting submit will remove that address from the mailing list if it is present. If the entered email address is not present in the mailing list the user wil receive a toast message to inform them of this and no action will be taken.
+
+<p align="center">
+    <img src="readme-assets\newsletter-unsubscribe.PNG" width="300px"/>
+</p>
+
+When admin users are logged in they can access the send newsletter page from their profile page. This page consists of a form with fields for subject and message. Filling in these fields and selecting 'Send' will send an email with these details to each email address in the mailing list.
+
+<p align="center">
+    <img src="readme-assets\send-newsletter.PNG" width="300px"/>
+</p>
+
+### Auth
+
+Auth is handled by django-allauth but all pages have been edited and restyled to match the rest of the website.
+
+#### Log In
+
+The sing in page contains a form which the user can use to log in if that have already registered for an account. Simply enter their details and select sign in. selecting the forgot password button will direct the user to the password reset page. If they do not have an account there is a link to direct them to do so.
+
+<p align="center">
+    <img src="readme-assets\sign-in.PNG" width="300px"/>
+</p>
+
+#### Sign Out
+
+The sign out page asks the user to confirm the wish to sign out. Clicking the sign out button will log the user out and redirect the user to the homepage.
+
+<p align="center">
+    <img src="readme-assets\log-out.PNG" width="150px"/>
+</p>
+
+#### Register
+
+The register page contains a form the user can use to create an account. They must ender all relevant details before clicking the sign up button and confirming their email address before logging in.
+
+<p align="center">
+    <img src="readme-assets\register.PNG" width="300px"/>
+</p>
+
+### Error Pages
+
+Custom error pages for 404 and 500 errors contain a simple box showing the error type and a button to return to the site homepage.
+
+<p align="center">
+    <img src="readme-assets\error404.PNG" width="300px"/>
+</p>
 
 ## Credits
 
