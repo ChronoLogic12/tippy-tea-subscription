@@ -16,8 +16,8 @@
         <div class="col m12 l4 center-align custom-card">
             <h5 class="capitalise">{{ plan.product.name }}</h5>
             <div class="card-image">
-                {% if plan.product.image_url %}
-                <img class="responsive-img" src="{{ plan.image_url }}">
+                {% if plan.product.images %}
+                <img class="responsive-img" src="{{ plan.product.images | first }}">
                 {% else %}
                 <img class="responsive-img"
                     src="https://res.cloudinary.com/chronologic12/image/upload/v1655374805/tippy/Tippy_xduny8.svg">
