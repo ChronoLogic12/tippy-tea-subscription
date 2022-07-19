@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_countries',
     'storages',
-    'livereload',
     'crispy_forms',
     'allauth',
     'allauth.account',
@@ -64,13 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'livereload.middleware.LiveReloadScript',
 ]
-
-if 'test' in sys.argv:
-     # modify MIDDLEWARE_CLASSES
-      MIDDLEWARE = list(MIDDLEWARE)
-      MIDDLEWARE.remove('livereload.middleware.LiveReloadScript')
 
 ROOT_URLCONF = 'tippy.urls'
 
