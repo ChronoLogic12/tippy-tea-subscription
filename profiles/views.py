@@ -6,6 +6,7 @@ from .models import Profile
 from mailing.models import Mailing
 from .forms import ProfileForm
 from django.views.defaults import server_error
+from checkout.models import Order
 
 @login_required
 def profile(request):
@@ -34,8 +35,11 @@ def profile(request):
             form = ProfileForm(instance=profile)
 
         template = 'profiles/profile.html'
+        orders = Order.objects.filter(user=request.user)
+        show_manage_orders_button = False if len(orders) == 0 else True
         context = {
             'form': form,
+            'show_manage_orders_button': show_manage_orders_button,
             'on_profile_page': True,
         }
 
