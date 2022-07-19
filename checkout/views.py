@@ -10,18 +10,18 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.views.defaults import page_not_found, server_error
 from django.http import JsonResponse
+from django.core.mail import send_mail
 
 from profiles.forms import ProfileForm
 from profiles.models import Profile
 from mailing.models import Mailing
 from checkout.models import Order
 from django.contrib.auth.models import User
-from stripe import Subscription
+from stripe import Subscription, Customer
 
-from djstripe.models import Plan
+from djstripe.models import Plan, Product
 
 import stripe
-import logging
 from django.conf import settings
 
 
@@ -103,74 +103,38 @@ def customer_portal(request):
 @csrf_exempt
 def webhook_received(request):
 	try:
-		# Replace this endpoint secret with your endpoint's unique secret
-		# If you are testing with the CLI, find the secret by running 'stripe listen'
-		# If you are using an endpoint defined with the API or dashboard, look in your webhook settings
-		# at https://dashboard.stripe.com/webhooks
 		webhook_secret = settings.DJSTRIPE_WEBHOOK_SECRET
 		request_data = request.POST
-		logger = logging.getLogger('testlogger')
-		logger.info("""***
-		
-		
-		
-		
-		****""")
 		if webhook_secret:
-			# Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
 			signature = request.META['HTTP_STRIPE_SIGNATURE']
 			event = stripe.Webhook.construct_event(
 			payload=request.body, sig_header=signature, secret=webhook_secret)
-			logger.info("""
-			
-			event created
-			
-			""")
 			data = event['data']
-			# Get the type of webhook event sent - used to check the status of PaymentIntents.
 			event_type = event['type']
 		else:
-			logger.info("webhook secret false")
 			data = request_data['data']
 			event_type = request_data['type']
 		data_object = data['object']
-		logger.info("""
-			
-			event type:
-			
-			""")
-		logger.info(event_type)
 		if event_type == 'customer.subscription.created':
-			logger.info("""
-			
-			event subscription created
-			
-			""")
-			subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
-			logger.info("""
-			
-			subscription created
-			
-			""")
-			user = User.objects.get_object_or_404(email=subscription.customer.email)
-			logger.info("""
-			
-			user found
-			
-			""")
-			order = Order(user=user, product=subscription.plan.product.id)
-			logger.info("""
-			
-			order created
-			
-			""")
+			subscription = Subscription.retrieve(data_object.id)
+			customer = Customer.retrieve(subscription.customer)
+			user = User.objects.get(email=customer.email)
+			product = Product.objects.get(id=subscription.plan.product)
+			order = Order(user=user, product=product)
 			order.save()
+			send_mail('Tippy - Order confirmation', 
+			f'Your order of {product.name} has been placed. Order number: {order.order_number}',
+			settings.EMAIL_HOST_USER,
+			[customer.email],
+			fail_silently=False,
+			)
 		elif event_type == 'customer.subscription.deleted':
-			subscription = Subscription.objects.get(id=data_object.id, expand=['customer', 'subscription.plan.product'])
-			user = User.objects.get_object_or_404(email=subscription.customer.email)
-			order = Order.objects.get_object_or_404(user=user, product=subscription.plan.product.id)
+			subscription = Subscription.retrieve("sub_1LN132GB1o2PoEdcMFGvTTLs")
+			customer = Customer.retrieve(subscription.customer)
+			user = User.objects.get(email=customer.email)
+			product = Product.objects.get(id=subscription.plan.product)
+			order = Order.objects.filter(user=user, product=product).first()
 			order.delete()
-
 		return JsonResponse({'status': 'success'})
 	except Exception as e:
 		return JsonResponse({'error': e})
@@ -178,24 +142,25 @@ def webhook_received(request):
 
 @login_required
 def success(request):
-    try:
-        session_id = request.GET.get('session_id', '')
-        if session_id == '':
-            return redirect(reverse('home'))
-        profile = get_object_or_404(Profile, user=request.user)
-        session = stripe.checkout.Session.retrieve(id=session_id, expand=['subscription.plan.product'])
-        if not profile.customer_id:
-            customer = session.customer
-            profile.customer_id = customer
-            profile.save()
-        product = session.subscription.plan.product 
-        template = 'checkout/success.html'
-        context = {
-          'product': product,
-        }
-        return render(request, template, context)
-    except Exception as e:
-      	return server_error(request)
+	try:
+		session_id = request.GET.get('session_id', '')
+		if session_id == '':
+			return redirect(reverse('home'))
+		profile = get_object_or_404(Profile, user=request.user)
+		session = stripe.checkout.Session.retrieve(id=session_id, expand=['subscription.plan.product'])
+		if not profile.customer_id:
+			customer = session.customer
+			profile.customer_id = customer
+			profile.save()
+		product = session.subscription.plan.product 
+		template = 'checkout/success.html'
+		context = {
+		'product': product,
+		}
+		return render(request, template, context)
+	except Exception as e:
+		print(e)
+		return server_error(request)
 
 def cancel(request):
   return render(request, 'checkout/cancel.html',)

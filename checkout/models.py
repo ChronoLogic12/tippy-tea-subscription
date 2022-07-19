@@ -6,8 +6,8 @@ from djstripe.models import Product
 
 class Order(models.Model):
     order_number = models.CharField(max_length=32, null=False, editable=False)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=False, blank=False)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=False, blank=False)
 
     def _generate_order_number(self):
         """
