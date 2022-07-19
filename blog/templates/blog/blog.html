@@ -11,6 +11,7 @@
 
 {% block content %}
 <section class="blog center-align z-depth-4">
+    <h1 class="hidden">Blog</h1>
     <div class="container row">
         {% if request.user.is_superuser %}
         <div class="col s12 m10 l8 offset-m1 offset-l2 add-blog-container">
@@ -23,9 +24,9 @@
                 <span class="card-title capitalise">{{ blog.title }}</span>
                 <div class="card-image">
                     {% if blog.image_url %}
-                    <img class="responsive-img" src="{{ blog.image_url }}">
+                    <img class="responsive-img" alt="blog post decorative image" src="{{ blog.image_url }}">
                     {% else %}
-                    <img class="responsive-img"
+                    <img class="responsive-img" alt="Outline of a steaming teacup in shades of pale green."
                         src="https://res.cloudinary.com/chronologic12/image/upload/v1655374805/tippy/Tippy_xduny8.svg">
                     {% endif %}
                 </div>

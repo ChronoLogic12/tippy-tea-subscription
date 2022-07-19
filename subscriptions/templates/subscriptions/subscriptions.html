@@ -17,9 +17,10 @@
             <h5 class="capitalise">{{ plan.product.name }}</h5>
             <div class="card-image">
                 {% if plan.product.images %}
-                <img class="responsive-img" src="{{ plan.product.images | first }}">
+                <img class="responsive-img" alt="{{plan.product.name}} decorative image"
+                    src="{{ plan.product.images | first }}">
                 {% else %}
-                <img class="responsive-img"
+                <img class="responsive-img" alt="Outline of a steaming teacup in shades of pale green."
                     src="https://res.cloudinary.com/chronologic12/image/upload/v1655374805/tippy/Tippy_xduny8.svg">
                 {% endif %}
             </div>
