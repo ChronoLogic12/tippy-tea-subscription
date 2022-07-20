@@ -10,7 +10,7 @@
     <img src="readme-assets\tippy-responsive.PNG" width="1200px"/>
 </p>
 
-_*This site is for training purposes only, the company is fictional and no orders will be charged or receive products.* _
+_*This site is for training purposes only, the company is fictional and no orders will be charged or products received.* _
 
 ## **About Tippy**
 
@@ -51,10 +51,8 @@ Tippy is a specialist subscription service bringing the greatest tastes from the
     - [Configuring Stripe](#configuring-stripe)
     - [Configuring Gmail](#configuring-gmail)
     - [Configuring AWS S3](#configuring-aws-s3)
-    - [Cloning and running locally](#cloning-and-running-locally)
   - [Credits](#credits)
     - [Services](#services)
-    - [Content](#content)
     - [Media](#media)
     - [Help and Info](#help-and-info)
 
@@ -68,9 +66,9 @@ The goal of this project is to produce an e-commerce website selling monthly spe
 
 #### As a first time user/potential customer -
 
-- Easily understand the sites purpose and learn more about the services offered.
+- Easily understand the site's purpose and learn more about the services offered.
 - Easily navigate to all relevant pages.
-- Easily find product details and prices to allow me to make and informed decision.
+- Easily find product details and prices to allow me to make an informed decision.
 - Create an account to store personal and purchase information.
 - Purchase a subscription.
 - Sign up for the company newsletter.
@@ -87,8 +85,8 @@ The goal of this project is to produce an e-commerce website selling monthly spe
 #### As an admin user -
 
 - Log in to an admin account.
-- Send emails to users signed up the the mailing list.
-- Add posts to the sites info blog.
+- Send emails to users signed up to the mailing list.
+- Add posts to the site's info blog.
 
 For user stories checklist please view the google sheets table [here](https://docs.google.com/spreadsheets/d/1rKYF5s_qeeRhiHWJwbDJQ15gvJIOe2B4bTUiPIVZyoo/edit?usp=sharing).
 
@@ -102,13 +100,13 @@ Wireframes were created for mobile, tablet and desktop screen sizes with [Figma]
 
 ### Design
 
-As tippy is targeted as a specialist and high end service I wanted the site to reflect this with a clean and clear design. I chose to use a fairly soft pallet in shades of green to tie in to the product and give a somewhat premium feel and included a dark raspberry accent/action colour to compliment.
+As tippy is targeted as a specialist and high end service I wanted the site to reflect this with a clean and clear design. I chose to use a fairly soft palette in shades of green to tie in to the product and give a somewhat premium feel. Included a dark raspberry accent/action colour to compliment.
 
 <p align="center">
     <img src="readme-assets/tippy-colour-palette.PNG" width="600px"/>
 </p>
 
-The site uses django-allauth pages for user management. All pages have been styled to match the rest of the website.
+The site uses django-allauth pages for user management. All of these pages have been styled to match the rest of the website.
 
 ## Database schema
 
@@ -118,19 +116,19 @@ Database model created using [dbdiagram.io](https://dbdiagram.io)
     <img src="readme-assets/database-schema.PNG" width="500px"/>
 </p>
 
-The site uses five models as show above:
+The site uses five models as shown above:
 
-- user (profile) extends the django user model and stores all required user data.
-- subscriptions: represents the plans a user can subscribe to and is extracted from products on stripe using djstripe.
-- orders: links user by id to the product they have ordered.
-- mailing: holds the email addresses of all people signed up to the mailing list.
-- blogs: are created by admin users and display to the user on the blogs page.
+- User (profile) extends the django user model and stores all required user data.
+- Subscriptions: represents the plans a user can subscribe to and is extracted from products on stripe using djstripe.
+- Orders: links user by id to the product they have ordered.
+- Mailing: holds the email addresses of all people signed up to the mailing list.
+- Blogs: are created by admin users and displayed to the user on the blogs page.
 
 ## Features
 
 ### Navigation
 
-The sites navigation section is located at the top of all pages. This section contains page navigation controls and is adaptive to screen size and where the current user is logged in. The navigation elements will also highlight depending on the current page.
+The site's navigation section is located at the top of all pages. This section contains page navigation controls and is adaptive to screen size and whether the current user is logged in. The navigation elements will also highlight depending on the current page.
 
 <p align="center">
     <img src="readme-assets\navbar-desktop.PNG" width="1200px"/>
@@ -138,7 +136,7 @@ The sites navigation section is located at the top of all pages. This section co
 <p align="center">
     <img src="readme-assets\navbar-desktop-logged-out.PNG" width="1200px"/>
 </p>
-For smaller screen sizes the navbar is collapsible and is accessed byt a burger icon in the top left of the screen.
+For smaller screen sizes the navbar is collapsible and is accessed by a burger icon in the top left of the screen.
 <p align="center">
     <img src="readme-assets\navbar-mobile.PNG" width="1200px"/>
 </p>
@@ -167,7 +165,7 @@ This site uses djangos messages framework to provide users with helpful feedback
 
 ### Home
 
-The homepage consists of two main sections; the first contains a small description of what tippy is and it's service, it also contains a prominent call to action button which will take the user to the subscriptions page. at the bottom of this section is a chevron button which when clicked scrolls the page to the next section.
+The homepage consists of two main sections; the first contains a small description of what tippy is and its service, it also contains a prominent call to action button which will take the user to the subscriptions page. at the bottom of this section is a chevron button which when clicked, scrolls the page to the next section.
 
 <p align="center">
     <img src="readme-assets\home-main.PNG" width="1200px"/>
@@ -189,7 +187,7 @@ The subscription page contains cards for each plan that can be subscribed to det
 
 ### About Us
 
-The about us page is for users who want to learn a little more about the company. It contains two cards each containing details on the companies ideal and philosophies as well as the work they are doing.
+The about us page is for users who want to learn a little more about the company. It contains two cards each containing details on the company's ideals and philosophies as well as the work they are doing.
 
 <p align="center">
     <img src="readme-assets\about-us.PNG" width="1200px"/>
@@ -197,7 +195,7 @@ The about us page is for users who want to learn a little more about the company
 
 ### Blog
 
-The blog page contains blog post updates created by admins. each post contains a title, image, body text and the author.
+The blog page contains blog post updates created by admins. Each post contains a title, image, body text and the author.
 
 <p align="center">
     <img src="readme-assets\blog.PNG" width="200px"/>
@@ -215,7 +213,7 @@ The add new blog page contains a form with fields for all required blog informat
     <img src="readme-assets\blog-add.PNG" width="300px"/>
 </p>
 
-The edit blogs page uses the same form as the add blogs page but is pre filled will the info from the blog that was selected to edit. Selecting confirm will update that blogs info in the database, the cancel button will return you to the blogs page.
+The edit blogs page uses the same form as the add blogs page but is pre-filled with the information from the blog that was selected to edit. Selecting confirm will update that blog's info in the database, the cancel button will return you to the blogs page.
 
 <p align="center">
     <img src="readme-assets\blog-edit.PNG" width="300px"/>
@@ -223,7 +221,7 @@ The edit blogs page uses the same form as the add blogs page but is pre filled w
 
 ### Profile
 
-The profile page contains a form detailing a users stored info including a checkbox details the users current subscription to mailing list status. If the user has saved data previously these will be pre filled, if they are already signed up for the mailing list the checkbox will be checked. The profile page also contains controls to manage subscriptions by opening the stripe customer portal and controls to delete suer account. When logged in as an admin there will also be an additional control to navigate to the send newsletter page.
+The profile page contains a form detailing a users stored info and a checkbox reflecting the users current subscription to mailing list status. If the user has saved data previously these will be pre filled, if they are already signed up for the mailing list the checkbox will be checked. The profile page also contains controls to manage subscriptions by opening the stripe customer portal and controls to delete user account. When logged in as an admin there will also be an additional control to navigate to the send newsletter page.
 
 <p align="center">
     <img src="readme-assets\profile.PNG" width="300px"/>
@@ -231,13 +229,13 @@ The profile page contains a form detailing a users stored info including a check
 
 ### Mailing
 
-The subscribe to mailing page contains a form with a single field for the users email. If the user is logged in and already has an email address associated with their profile this field will be pre filled. Filling in the field and selecting register will add that address to the mailing list. If the entered email address is already part of the mailing list the user wil receive a toast message to inform them of this and no action will be taken.
+The subscribe to mailing page contains a form with a single field for the user's email. If the user is logged in and already has an email address associated with their profile this field will be pre filled. Filling in the field and selecting register will add that address to the mailing list. If the entered email address is already part of the mailing list the user will receive a toast message to inform them of this and no action will be taken.
 
 <p align="center">
     <img src="readme-assets\newsletter.PNG" width="300px"/>
 </p>
 
-The unsubscribe from mailing list page uses the same form from the subscribe page and is also pre filled if the user is logged in and has a registered email address. Filling in the field and selecting submit will remove that address from the mailing list if it is present. If the entered email address is not present in the mailing list the user wil receive a toast message to inform them of this and no action will be taken.
+The unsubscribe from mailing list page uses the same form from the subscribe page and is also pre filled if the user is logged in and has a registered email address. Filling in the field and selecting submit will remove that address from the mailing list if it is present. If the entered email address is not present in the mailing list the user will receive a toast message to inform them of this and no action will be taken.
 
 <p align="center">
     <img src="readme-assets\newsletter-unsubscribe.PNG" width="300px"/>
@@ -255,7 +253,7 @@ Auth is handled by django-allauth but all pages have been edited and restyled to
 
 #### Log In
 
-The sing in page contains a form which the user can use to log in if that have already registered for an account. Simply enter their details and select sign in. selecting the forgot password button will direct the user to the password reset page. If they do not have an account there is a link to direct them to do so.
+The sign in page contains a form which the user can use to log in if they have already registered for an account. Simply enter their details and select sign in. Selecting the forgot password button will direct the user to the password reset page. If they do not have an account there is a link to direct them to register for one.
 
 <p align="center">
     <img src="readme-assets\sign-in.PNG" width="300px"/>
@@ -263,7 +261,7 @@ The sing in page contains a form which the user can use to log in if that have a
 
 #### Sign Out
 
-The sign out page asks the user to confirm the wish to sign out. Clicking the sign out button will log the user out and redirect the user to the homepage.
+The sign out page asks the user to confirm they wish to sign out. Clicking the sign out button will log the user out and redirect them to the homepage.
 
 <p align="center">
     <img src="readme-assets\log-out.PNG" width="150px"/>
@@ -271,7 +269,7 @@ The sign out page asks the user to confirm the wish to sign out. Clicking the si
 
 #### Register
 
-The register page contains a form the user can use to create an account. They must ender all relevant details before clicking the sign up button and confirming their email address before logging in.
+The register page contains a form the user can use to create an account. They must enter all relevant details before clicking the sign up button and confirming their email address before logging in.
 
 <p align="center">
     <img src="readme-assets\register.PNG" width="300px"/>
@@ -293,31 +291,42 @@ For full testing documentation please see [TESTING.md](TESTING.md)
 
 ### Deploying to Heroku
 
-To deploy this application to heroku first we must make sure to establish a requirements.txt and Procfile as heroku needs these to operate. First type:
+To deploy this application to heroku first I made sure to establish a requirements.txt and Procfile as heroku needs these to operate. First into the terminal to establish the requirements.txt file enter:
 
 ```sh
 pip3 freeze --local > requirements.txt
 ```
 
-into the terminal to establish your requirements.txt file. Then enter:
+Then to create the Procfile:
 
 ```sh
 echo web: gunicorn tippy.wsgi:application > Procfile
 ```
 
-to insert the startup commands for heroku into a Procfile.
-
-- Next, go to [Heroku](https://www.heroku.com/) and login/register
-- Navigate to your dashboard and select 'New' - 'Create new app'
-- Enter a unique application name and select your region then click 'Create app'
+- Navigated to [Heroku](https://www.heroku.com/).
+- Navigate to the dashboard and select 'New' - 'Create new app'
+- Enter a unique application name and select region then click 'Create app'
 - Navigate to the new apps overview page, under installed add-ons click 'configure Add-ons'. Search for 'Heroku Postgres' and select to add it to add-ons.
-- To connect your app and set up automatic deployment, select 'GitHub' under the 'Deployment method' section.
-- Select your GitHub profile and the name of the repository containing your code.
-- Add your config variables to Heroku by navigating to settings, scrolling down and clicking 'Reveal Config Vars'. Then input the key value pairs from your `.env` file
-- Return to the deploy tab and select 'Enable Automatic deployment'
-- Once the app is deployed you can open the live site by selecting the 'Open app' button at the top right of the page.
+- To set up automatic deployment I selected 'GitHub' under the 'Deployment method' section. Then selected my github profile and the name of the repository containing my code.
+- I then added my config variables to Heroku by navigating to settings, scrolling down and clicking 'Reveal Config Vars'. Then entering the key value pairs.
+- I then returned to the deploy tab and selected 'Enable Automatic deployment'.
+- Once the app is deployed the live site can be accessed by selecting the 'Open app' button at the top right of the page.
 
 ### Configuring Stripe
+
+- Login to stripe
+- Select the 'new business' button at the top left of the screen and enter the name.
+- Navigate to the products tab and add products using the add product button.
+- Navigate to the 'developers' tab in the top right then 'webhooks' in the left navigation menu.
+- Select 'Add an endpoint'
+- Enter the endpoint url (https://tippy-tea-subscription.herokuapp.com/checkout/webhook/)
+- Click 'select events' then select all events and 'Add events'.
+- Select Add endpoint.
+- Navigate to settings, then email under business settings.
+- Turn on, 'email customers about successful payments'.
+- Entered config vars to heroku for the stripe public, secret and webhook keys.
+- The public and secret keys are located in the upper right section of the developers tab.
+- The webhook secret is located in the business endpoint of the webhooks section of the developer tab, under signing secret.
 
 ### Configuring Gmail
 
@@ -334,60 +343,8 @@ to insert the startup commands for heroku into a Procfile.
 
 ### Configuring AWS S3
 
-- Log in to AWS.
-- Search for s3 and select it
-- On the buckets page select create bucket, add bucket name and select local region. Under object ownership click ACLs enabled and bucket owner preferred. Uncheck 'Block all public access' and create bucket.
-- Navigate to the new buckets properties tab
-
-### Cloning and running locally
-
-- To clone the repository for this project first navigate to the [Repository main page](https://github.com/ChronoLogic12/tippy-tea-subscription) and click on the **code** button.
-
-<p align="center">
-    <img src="readme-assets\clone-code.PNG" width="500px"/>
-</p>
-
-- To clone the repository using HTTPS, select the HTTPS tab under the clone section and click the icon to copy the provided url to the clipboard.
-
-<p align="center">
-    <img src="readme-assets\clone-https.PNG" width="200px"/>
-</p>
-
-- Open Git Bash and navigate to the location you would like to store the cloned repository.
-- Type `git clone` followed by the url you copied earlier.
-
-```sh
-$ git clone https://github.com/ChronoLogic12/bookmarks.git
-```
-
-- Press enter to create your cloned repository.
-- In bash navigate to the root directory of the downloaded project and run the following command to create a shell and install dependencies.
-
-```sh
-pipenv shell
-pipenv install
-```
-
-- At the project root directory create a file called `.env`.
-- in `.env` add the following environment variable data and replace empty strings with your stripe key data.
-
-```py
-SECRET_KEY = ''
-STRIPE_PUBLIC_KEY = ''
-STRIPE_SECRET_KEY = ''
-STRIPE_WH_SECRET = ''
-DEVELOPMENT = 'True'
-```
-
-- To run a local development server from Bash:
-
-```sh
-python3 manage.py runserver
-```
-
-run on http://localhost:8000/
-
-For more details on cloning repositories click [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+- For the AWS deployment configuration the project reduced scope of static file hosting by comparison to the 'boutique ado Code Institute' tutorial project and so I was able to follow the same steps omitting media file configuration.
+- After configuration I retrieved the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY keys via the text download and inserted them into my heroku config vars.
 
 ## Credits
 
@@ -404,23 +361,19 @@ For more details on cloning repositories click [here](https://docs.github.com/en
 - [Gunicorn](https://gunicorn.org/) - wsgi server.
 - [MySQL](https://www.sqlite.org/index.html) - database.
 
-### Content
-
-- [Bootstrap](https://getbootstrap.com/) was used to create the collapsing navigation bar and responsive grid layouts
-- [Bootstrap Icons](https://icons.getbootstrap.com/) for social media link icons
-
 ### Media
 
 - [Cloudinary](https://cloudinary.com/console/c-087b7b36d5737750ed37ab5fb60479/getting-started) CDN was used for cloud based image storage and servicing.
 - Images were sourced from [Pexels](https://www.pexels.com/) and can be found in [this collection](https://www.pexels.com/collections/tippy-w5mdqpg/).
 - The brand logo and favicon were created my me using [Adobe Ilistrator](https://www.adobe.com/uk/products/illustrator.html).
+- All body copy was written by me.
 
 ### Help and Info
 
 - Code Institute learning material - general knowledge.
-- Code Institute - 'boutique ado' learning project - specific django knowledge.
-- [Stripe documentation](https://stripe.com/docs/billing/quickstart) - checkout app was adapted from code found in the stripe docs billing quick start guid.
-- [djstripe](https://dj-stripe.dev/) linking between django and stripe.
+- Code Institute - 'boutique ado' learning project - specific django knowledge and some settings configuration.
+- [Stripe documentation](https://stripe.com/docs/billing/quickstart) - checkout app was adapted from code found in the stripe docs billing quick start guide.
+- [djstripe docs](https://dj-stripe.dev/) linking between django and stripe.
 - [Codecademy](https://www.codecademy.com/learn) - general knowledge.
 - [w3schools](https://www.w3schools.com/) - general knowledge.
 - [MND Web Docs](https://developer.mozilla.org/en-US/) - general knowledge.
