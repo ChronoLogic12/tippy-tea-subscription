@@ -51,6 +51,7 @@ Tippy is a specialist subscription service bringing the greatest tastes from the
     - [Configuring Stripe](#configuring-stripe)
     - [Configuring Gmail](#configuring-gmail)
     - [Configuring AWS S3](#configuring-aws-s3)
+  - [Potential Future Features](#potential-future-features)
   - [Credits](#credits)
     - [Services](#services)
     - [Media](#media)
@@ -345,6 +346,12 @@ echo web: gunicorn tippy.wsgi:application > Procfile
 
 - For the AWS deployment configuration the project reduced scope of static file hosting by comparison to the 'boutique ado Code Institute' tutorial project and so I was able to follow the same steps omitting media file configuration.
 - After configuration I retrieved the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY keys via the text download and inserted them into my heroku config vars.
+
+## Potential Future Features
+
+- Admin portal to manage product details within the app with business UI.
+- Branded and styled email templates for a better customer experience.
+- Expand product range to include individual items (tea brewing accessories, merchandise etc) in addition to the subscriptions.
 
 ## Credits
 
