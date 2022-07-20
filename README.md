@@ -1,7 +1,7 @@
 # **Tippy** - Tea Subscription
 
 <p align="center">
-    <img src="readme-assets/tippy-logo-round.png" width="200px"/>
+    <img src="readme-assets/tippy-logo-round.PNG" width="200px"/>
 </p>
 
 [Tippy - live site](https://tippy-tea-subscription.herokuapp.com/)

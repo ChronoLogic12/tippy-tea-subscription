@@ -1,7 +1,7 @@
 # **Tippy** - Testing
 
 <p align="center">
-    <img src="readme-assets/tippy-logo-round.png" width="200px"/>
+    <img src="readme-assets/tippy-logo-round.PNG" width="200px"/>
 </p>
 
 [README.md](README.md)
@@ -35,15 +35,15 @@
 - Easily understand the site's purpose and learn more about the services offered.
   - The site's homepage background image and introduction paragraph quickly inform first time users of the site's purpose. This is then further expanded upon if the user scrolls to the 'How it Works' section of the homepage or visits the about us page.
   <p align="center">
-    <img src="readme-assets/home-main.png" width="300px"/>
+    <img src="readme-assets/home-main.PNG" width="300px"/>
   </p>
   <p align="center">
-    <img src="readme-assets/how-it-works.png" width="300px"/>
+    <img src="readme-assets/how-it-works.PNG" width="300px"/>
   </p>
 - Easily navigate to all relevant pages.
   - The site boasts an elegant, intuitive and adaptive navigation system on all screen sizes. Making it simple to traverse all pages.
   <p align="center">
-    <img src="readme-assets/navbar-desktop.png" width="1200px"/>
+    <img src="readme-assets/navbar-desktop.PNG" width="1200px"/>
   </p>
   <p align="center">
   <img src="readme-assets\navbar-sidenav.PNG" width="100px"/>
@@ -402,7 +402,7 @@ coverage report
 The coverage report results read as follows.
 
 <p align="center">
-    <img src="readme-assets/coverage.png" width="500px"/>
+    <img src="readme-assets/coverage.PNG" width="500px"/>
 </p>
 
 ## **Bugs**
