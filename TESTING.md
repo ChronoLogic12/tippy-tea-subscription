@@ -379,8 +379,6 @@ pipenv install
 
 #### Running the test suite
 
-_NB: A number of the tests rely on the stripe configuration, e.g subscriptions. Linking your account to the app and creating subscriptions as per the stripe docs will resolve these tests._
-
 To run the test suite in terminal run the following command:
 
 ```sh
