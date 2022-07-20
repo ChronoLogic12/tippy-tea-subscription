@@ -33,6 +33,7 @@ stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 @login_required
 @require_POST
 def checkout(request):
+	""" Render checkout page """
 	try:
 		plan = Plan.objects.get(id=request.POST['plan_id'])
 		template = 'checkout/checkout.html'
@@ -106,6 +107,7 @@ def customer_portal(request):
 @require_POST
 @csrf_exempt
 def webhook_received(request):
+	""" Manage webhooks from stripe """
 	try:
 		webhook_secret = settings.DJSTRIPE_WEBHOOK_SECRET
 		request_data = request.POST
@@ -146,6 +148,7 @@ def webhook_received(request):
 
 @login_required
 def success(request):
+	""" Render checkout success page """
 	try:
 		session_id = request.GET.get('session_id', '')
 		if session_id == '':
@@ -166,6 +169,7 @@ def success(request):
 		return server_error(request)
 
 def cancel(request):
+	""" Render checkout cancel page """
 	try:
 		return render(request, 'checkout/cancel.html',)
 	except Exception:
