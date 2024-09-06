@@ -27,6 +27,7 @@ django = "==5.1"
 idna = "==3.7"
 jmespath = "==1.0.1"
 jsonfield = "==3.1.0"
+mysqlclient = "*"
 oauthlib = "==3.2.2"
 pycparser = "==2.22"
 pyjwt = "==2.9.0"
@@ -41,7 +42,6 @@ tornado = "==6.4.1"
 typing-extensions = "==4.12.2"
 tzdata = "==2024.1"
 urllib3 = "==2.2.2"
-mysqlclient = "*"
 
 [dev-packages]
 
