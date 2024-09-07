@@ -18,9 +18,9 @@ gunicorn==23.0.0
 idna==3.7
 jmespath==1.0.1
 jsonfield==3.1.0
-mysqlclient==2.2.4
 oauthlib==3.2.2
 psycopg2-binary==2.9.9
+psycopg2-binary>=2.9.9
 pycparser==2.22
 PyJWT==2.9.0
 python-dateutil==2.9.0
